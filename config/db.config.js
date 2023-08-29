@@ -1,9 +1,7 @@
-const mongoose = require ("mongoose"); 
+const mongoose = require("mongoose");
 
-mongoose.connect ("mongodb://127.0.0.1:27017/beatBreeze")
-.then (() => {
-    console.log ("connected to mongoose");
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/beatBreeze';
 
-}).catch (err => {
-    console.error ("do not connected to mongoose",err);
-})
+mongoose.connect(MONGODB_URI)
+  .then(() => console.info(`Successfully connected to the database ${MONGODB_URI}`))
+  .catch((error) => console.error(`An error ocurred trying to connect to the database ${MONGODB_URI}`, error))
