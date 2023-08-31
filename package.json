@@ -2,7 +2,7 @@
   "name": "beatbreeze",
   "version": "1.0.0",
   "description": "Modulo 2 Project",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "dev": "nodemon -e hbs,js,css app.js",
     "start": "node app.js"
