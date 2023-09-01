@@ -14,12 +14,29 @@ spotifyApi
     console.log("The error while searching artists occurred: ", err)
   );
 
-module.exports.artistSearch = (req, res) => {
+module.exports.search = (req, res) => {
+  let Artists;
+  let Tracks;
+  let Albums;
+  // - ARTISTS
   spotifyApi
-    .searchArtists(req.query.artist)
-    .then((data) => {
-      res.render("/artist-search", {
-        artists: data.body.artists.items,
+    .searchArtists(req.query.search)
+    .then((artists) => {
+      Artists = artists.body.artists.items;
+    })
+    // - TRACKS
+    .then(() => {
+      spotifyApi.searchTracks(req.query.search).then((tracks) => {
+        Tracks = tracks.body.tracks.items;
+      });
+    })
+    // - ALBUMS
+    .then(() => {
+      spotifyApi.searchAlbums(req.query.search).then((albums) => {
+        Albums = albums.body.albums.items;
+        res.render("music/search", {
+          artists: { Artists: Artists, Tracks: Tracks, Albums: Albums },
+        });
       });
     })
     .catch((err) =>
@@ -34,7 +51,7 @@ module.exports.albums = (req, res) => {
       const httpHeader = res.req.rawHeaders.find((header) =>
         header.startsWith("http")
       );
-      res.render("/albums", {
+      res.render("music/albums", {
         albums: data.body.items,
         artist: data.body.items[0].artists[0].name,
         httpHeader: httpHeader,
@@ -49,7 +66,7 @@ module.exports.tracks = (req, res) => {
   spotifyApi
     .getAlbumTracks(req.params.id)
     .then((tracks) => {
-      res.render("/tracks", { tracks: tracks.body.items });
+      res.render("music/tracks", { tracks: tracks.body.items });
     })
     .catch((err) =>
       console.log("The error while searching albums occurred: ", err)
@@ -70,15 +87,19 @@ module.exports.genres = (req, res) => {
 
 module.exports.oneGenres = (req, res) => {
   console.log("Genre", req.params.id);
-  spotifyApi.getRecommendations({
-    min_energy: 0.4,
-    seed_genres: [req.params.id],
-    min_popularity: 50
-  })
-.then(function(data) {
-  let recommendations = data.body;
-  console.log(recommendations);
-}, function(err) {
-  console.log("Something went wrong!", err);
-});
+  spotifyApi
+    .getRecommendations({
+      min_energy: 0.4,
+      seed_genres: [req.params.id],
+      min_popularity: 50,
+    })
+    .then(
+      function (data) {
+        let recommendations = data.body;
+        console.log(recommendations);
+      },
+      function (err) {
+        console.log("Something went wrong!", err);
+      }
+    );
 };

@@ -16,7 +16,7 @@ router.get("/", users.home);
 // router.post("/users/:id", secure.isAuthenticated, users.doEdit);
 // router.post("/users/:id/delete", secure.isAuthenticated, users.delete);
 
-router.get("/artist-search", spotify.artistSearch);
+router.get("/search", spotify.search);
 router.get("/albums/:id", spotify.albums);
 router.get("/albums/:id/tracks", spotify.tracks);
 

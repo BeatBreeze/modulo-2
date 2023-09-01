@@ -1,0 +1,32 @@
+<div class="m-5">
+  <a class="btn btn-link" href="/">Back</a>
+  <div class='row row-cols-1 row-cols-md-3 g-5 text-center'>
+      <div class='col'>
+      <h3>ARTISTS</h3>
+
+    {{#each artists.Artists as |artist|}}
+        <div class='card border border-0 '>
+          {{> artistAlbum info=artist  isAlbum=true}}
+        </div>
+    {{/each}}
+      </div>
+      <div class='col'>
+      <h3>ALBUMS</h3>
+    {{#each artists.Albums as |artist|}}
+        <div class='card border border-0'>
+          {{> artistAlbum info=artist  isAlbum=false}}
+        </div>
+    {{/each}}
+      </div>
+      <div class='col'>
+      <h3>TRACKS</h3>
+
+    {{#each artists.Tracks as |artist|}}
+        <div class='card border border-0'>
+          {{> artistAlbum info=artist  isAlbum=true}}
+        </div>
+    {{/each}}
+      </div>
+      
+  </div>
+</div>
