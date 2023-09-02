@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const users = require("../controllers/users.controller");
 const spotify = require("../controllers/spotify.controller");
+const playlist = require("../controllers/playlist.controller");
 const secure = require ("../middlewares/secure.mid");
 
 
@@ -9,13 +10,14 @@ router.get("/register", users.register);
 router.post("/register", users.doRegister);
 router.get('/login', users.login);
 router.post('/login', users.doLogin);
-// router.get('/profile', secure.isAuthenticated, users.profile);
+router.post("/logout", secure.isAuthenticated, users.logout);
 
 router.get("/", users.home);
-// router.get("/users/:id", secure.isAuthenticated, users.detail);
-// router.get("/users/:id/edit", secure.isAuthenticated, users.edit);
-// router.post("/users/:id", secure.isAuthenticated, users.doEdit);
-// router.post("/users/:id/delete", secure.isAuthenticated, users.delete);
+router.get("/profile", secure.isAuthenticated, users.profile);
+router.get('/playlist', secure.isAuthenticated, playlist.create);
+router.post('/playlist', secure.isAuthenticated, playlist.doCreate);
+// router.get("/profile/:id/edit", secure.isAuthenticated, users.edit);
+// router.post("/profile/:id", secure.isAuthenticated, users.doEdit);
 
 router.get("/search", spotify.search);
 router.get("/albums/:id", spotify.albums);

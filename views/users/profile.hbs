@@ -1,0 +1,48 @@
+<div class="container mb-5">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-center">User Profile</h1>
+        <div class="mb-3 d-flex">
+          <a class="btn btn-primary me-2" href="/">Home</a>          
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-3 d-flex justify-content-center align-items-start">
+                <img src="{{user.avatarURL}}" alt="User Profile Image" class="img-fluid rounded-circle">
+              </div>
+              <div class="col-md-9">
+                <div class="d-flex justify-content-between">
+                  <h5 class="card-title">@{{user.username}}</h5>
+                  <a class="btn btn-primary me-2" href="/profile/{{user.id}}/edit">Edit</a>
+                </div>                
+                <p class="card-text">Name: {{user.name}}</p>
+                <p class="card-text">Email: {{user.email}}</p>
+                <p class="card-text">Register: {{prettyDate user.createdAt}}</p>
+                <ul class="list-unstyled">
+                  <li>Playlists: {{user.playlists.length}}</li>
+                </ul>
+                <div class="d-flex justify-content-around mb-4">
+                  <h2 class="fw-bolder">Playlists</h2>
+                  <a class="btn btn-light" href="/playlist"><strong
+                    style="color: purple"
+                    >New Playlist</strong>
+                  </a>
+                </div>
+                
+                <div class='row row-cols-1 row-cols-md-4 g-2'>
+                      {{#each user.playlists as |playlist|}}
+                      <div class='col'>
+                        <div class='card border border-0'>
+                          {{> playlist info=playlist}}
+                        </div>
+                      </div>
+                      {{/each}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

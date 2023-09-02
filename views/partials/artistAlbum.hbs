@@ -10,18 +10,18 @@
 </a> --}}
     <img
       src="{{info.images.0.url}}"
-      class="object-fit-contain"
+      class="card-img-top object-fit-contain imgList"
       alt="{{info.name}}"
     />
   {{else}}
     <img
       src="img/no-cover.png"
-      class="object-fit-contain"
+      class="card-img-top object-fit-contain imgList"
       alt="{{info.name}}"
     />
   {{/if}}
 {{else}}
-  <img src="img/no-cover.png" class="object-fit-contain" alt="{{info.name}}" />
+  <img src="img/no-cover.png" class="card-img-top object-fit-contain imgList" alt="{{info.name}}" />
 {{/if}}
 <div class="card-body text-middle">
   <p class="card-title"><strong>{{info.name}}</strong></p>

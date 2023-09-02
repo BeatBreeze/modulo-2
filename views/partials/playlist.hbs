@@ -1,0 +1,36 @@
+{{#if info.images}}
+  {{#if info.images.0.url}}
+    <a href="/playlist/{{info.id}}">
+      <img
+        src="{{info.images.0.url}}"
+        class="card-img-top object-fit-contain"
+        href="/playlist/{{info.id}}"
+        alt="{{info.name}}"
+      />
+    </a>
+  {{else}}
+    <a href="/playlist/{{info.id}}">
+      <img
+        src="img/no-cover.png"
+        class="card-img-top object-fit-contain"
+        href="/playlist/{{info.id}}"
+        alt="{{info.name}}"
+      />
+    </a>
+  {{/if}}
+{{else}}
+  <a href="/playlist/{{info.id}}">
+      <img
+        src="img/no-cover.png"
+        class="card-img-top object-fit-contain"
+        href="/playlist/{{info.id}}"
+        alt="{{info.name}}"
+      />
+    </a>
+{{/if}}
+<div class="card-body text-middle">
+  <p class="card-title"><strong>{{info.name}}</strong></p>
+  <a type="button" href="/playlist/{{info.id}}" class="btn btn-danger btn-sm">
+    View Playlist
+  </a>
+</div>

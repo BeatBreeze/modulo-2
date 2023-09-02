@@ -20,9 +20,10 @@ module.exports.session = expressSession({
     const userId = req.session.userId;
     if (userId) {
       User.findById(userId)
-        .populate('playlist')
+        .populate('playlists')
         .then((user) => {
           req.user = user;
+          console.log(user);
           res.locals.currentUser = user;
           next();
         })

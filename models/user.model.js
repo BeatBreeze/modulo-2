@@ -29,7 +29,6 @@ const userSchema = new Schema({
             },
             message: "Username invalid can not contains white spaces"
         },
-       
     },
     password: {
         type: String,
@@ -44,7 +43,13 @@ const userSchema = new Schema({
         }
     }
 
-}, { timestamps: true }); //registra la fecha de cuando se creó//
+}, { timestamps: true, virtuals: true }); //registra la fecha de cuando se creó//
+
+userSchema.virtual("playlists", {
+  ref: "Playlist",
+  localField: "_id",
+  foreignField: "user",
+}) 
 
 userSchema.pre('save', function(next) {
     const user = this;
