@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const logger = require("morgan");
 const SpotifyWebApi = require('spotify-web-api-node');
+const flash = require ("connect-flash");
+
 
 require("./config/db.config");
 require("./config/hbs.config");
@@ -24,7 +26,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 app.use(logger("dev"));
-
+const sessionConfig = require('./config/session.config');
+app.use(sessionConfig.session);
+//app.use(sessionConfig.loadSessionUser);//
+app.use (flash());
 
 
 const router = require("./config/routes.config");
