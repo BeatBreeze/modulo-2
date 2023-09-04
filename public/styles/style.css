@@ -1,7 +1,31 @@
 .imgTop {
-    width: 36px;
-    /* margin-right: 6px; */
+  width: 36px;
+  /* margin-right: 6px; */
 }
 .imgList {
-    height: 170px
+  height: 170px;
+}
+.carouselButton {
+  width: 5%;
+}
+
+.carouselStyle {
+  width: 300px;
+  height: 170px;
+}
+
+.navVertical {
+  flex: content;
+  position: absolute;
+  background-color: white;
+}
+
+.navVertical a {
+  color: purple;
+  padding: 1rem;
+}
+
+.navVertical a:hover {
+  background-color: purple;
+  color: white;
 }

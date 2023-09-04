@@ -1,6 +1,6 @@
-<nav class="navbar" style="background-color: purple;">
+<nav class="navbar position-static" style="background-color: purple;">
   <div class="container-fluid">
-    {{!-- - LEFT --}}
+    {{! - LEFT }}
     <a class="navbar-brand" href="/">
       <img
         src="https://media.istockphoto.com/id/1286099898/es/vector/color-geom%C3%A9trico-ecualizador-circular-de-ne%C3%B3n-ondas-de-sonido-de-audio-redondo-eq.jpg?s=2048x2048&w=is&k=20&c=Q2R16IuQu8GJ1-DWv4_fpA9WhLihOH3jS7Dtwyj404I="
@@ -25,7 +25,8 @@
       </ol>
       
     </nav> }}
-    {{!-- - SEARCH --}}
+
+    {{! - SEARCH }}
     <form class="d-flex" method="GET" action="/search">
       <input
         class="form-control me-2"
@@ -37,35 +38,35 @@
       />
       <button class="btn btn-light" type="submit">Search</button>
     </form>
-    {{!-- - RIGHT --}}
+    {{! - RIGHT }}
     <ul class="nav justify-content-center nav-item me-md-2">
       {{#if currentUser}}
-      <div class="d-flex align-items-center ">
-        <a href="/profile/{{currentUser.id}}">
-          <img
-            src="{{currentUser.avatarURL}}"
-            class="rounded-circle imgTop"
-            id="rounded-circle-navbar"
-            href="/profile/{{currentUser.id}}"
-            alt="User profile"
-          />
-        </a>
-      </div>
-      <form method="POST" action="/logout" class="m-0">
-        <button type="submit" class="btn btn-danger mx-2">Log out</button>
-      </form>
-    {{else}}
-      <div class="d-flex nav-item me-md-2">
-        <a class="btn btn-light" aria-current="page" href="/login"><strong
-            style="color: purple"
-          >Login</strong></a>
-      </div>
-      <div class="nav-item me-md-2">
-        <a class="btn btn-light" href="/register"><strong
-            style="color: purple"
-          >Register</strong></a>
-      </div>
-    {{/if}}      
+        <div class="d-flex align-items-center">
+          <a href="/profile">
+            <img
+              src="{{currentUser.avatarURL}}"
+              class="rounded-circle imgTop"
+              id="rounded-circle-navbar"
+              href="/profile"
+              alt="User profile"
+            />
+          </a>
+        </div>
+        <form method="POST" action="/logout" class="m-0">
+          <button type="submit" class="btn btn-danger mx-2">Log out</button>
+        </form>
+      {{else}}
+        <div class="d-flex nav-item me-md-2">
+          <a class="btn btn-light" aria-current="page" href="/login"><strong
+              style="color: purple"
+            >Login</strong></a>
+        </div>
+        <div class="nav-item me-md-2">
+          <a class="btn btn-light" href="/register"><strong
+              style="color: purple"
+            >Register</strong></a>
+        </div>
+      {{/if}}
       <div class="nav-item me-md-2">
         <a class="btn btn-light" href="/explore"><strong
             style="color: purple"
@@ -73,4 +74,16 @@
       </div>
     </ul>
   </div>
+
 </nav>
+<ul class="nav flex-column navVertical">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">HOME</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">GENRES</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">PLAYLISTS</a>
+  </li>
+</ul>
