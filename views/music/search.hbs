@@ -31,7 +31,7 @@
     <div class='row row-cols-2 row-cols-lg-6 g-2 g-lg-3'>
       {{#each artists.Tracks as |artist|}}
         <div class='col card border border-0'>
-          {{> artistAlbum info=artist  isAlbum=true}}
+          {{> track info=artist  isAlbum=true}}
         </div>
       {{/each}}
     </div>

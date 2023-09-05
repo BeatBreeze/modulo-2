@@ -75,3 +75,61 @@ module.exports.logout = (req, res) => {
 module.exports.profile = (req, res, next) => {
   res.render("users/profile", { user: req.user });
 };
+
+module.exports.edit = (req, res, next) => {
+  User.findById(req.user.id)
+    .then((user) => {
+      res.render("users/edit", { user });
+    })
+    .catch(next);
+};
+
+module.exports.doEdit = (req, res, next) => {
+  User.findOne({ username: req.body.username })
+    .then((user) => {
+      if (user) {
+        res.render("users/edit", {
+          user: req.body,
+          errors: {
+            username: "Username already exists",
+          },
+        });
+      } else {
+        req.user.password = req.body.password;
+        req.user.username = req.body.username;
+        req.user.email = req.body.email;
+        return req.user.save().then(() => {
+          req.flash("data", JSON.stringify({ info: "Please login in" }));
+          res.redirect("/profile");
+        });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      if (error instanceof mongoose.Error.ValidationError) {
+        res.render("users/edit", { user: req.body, errors: error.errors });
+      } else {
+        next(error);
+      }
+    });
+};
+
+// DELETE
+module.exports.delete = (req, res, next) => {
+  // DELETE PLAYLIST
+  Playlist.find({ user: req.user.id })
+    .then((playlists) => {
+      playlists.map((playlis) => {
+        Playlist.findByIdAndDelete(playlis.id)
+          .then(() => {})
+          .catch(next);
+      });
+    })
+    .catch(next);
+  // DELETE USER
+  User.findByIdAndDelete(req.user.id)
+    .then(() => {
+      res.redirect(`/`);
+    })
+    .catch(next);
+};

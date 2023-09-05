@@ -14,7 +14,7 @@
               <div class="col-md-9">
                 <div class="d-flex justify-content-between">
                   <h5 class="card-title">@{{user.username}}</h5>
-                  <a class="btn btn-primary me-2" href="/profile/{{user.id}}/edit">Edit</a>
+                  <a class="btn btn-primary me-2" href="/profile/edit">Edit</a>
                 </div>                
                 <p class="card-text">Name: {{user.name}}</p>
                 <p class="card-text">Email: {{user.email}}</p>
@@ -39,6 +39,13 @@
                       </div>
                       {{/each}}
                 </div>
+                <form
+                  method="POST"
+                  class="text-center"
+                  action="/profile/delete"
+                  >
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
               </div>
             </div>
           </div>

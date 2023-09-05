@@ -1,0 +1,70 @@
+{{#if info.images}}
+  {{#if info.images.0.url}}
+    {{!-- <a href="/movies/{{movie.id}}">
+  <img
+    src="{{movie.image}}"
+    class="card-img-top object-fit-contain"
+    href="/movies/{{movie.id}}"
+    alt="{{movie.title}}"
+  />
+</a> --}}
+    <img
+      src="{{info.images.0.url}}"
+      class="card-img-top object-fit-contain imgList"
+      alt="{{info.name}}"
+    />
+  {{else}}
+    <img
+      src="img/no-cover.png"
+      class="card-img-top object-fit-contain imgList"
+      alt="{{info.name}}"
+    />
+  {{/if}}
+{{else}}
+  <img
+    src="img/no-cover.png"
+    class="card-img-top object-fit-contain imgList"
+    alt="{{info.name}}"
+  />
+{{/if}}
+<div class="card-body text-middle">
+  <p class="card-title"><strong>{{info.name}}</strong></p>
+  {{#if isAlbum}}
+    <p>{{info.release_date}}</p>
+    {{!-- <a
+      type="button"
+      href="/albums/{{info.id}}/tracks"
+      class="btn btn-danger btn-sm"
+    >
+      View Tracks
+    </a> --}}
+    <p class="d-inline-flex gap-1">
+      <a
+        class="btn btn-primary"
+        data-bs-toggle="collapse"
+        href="#collapse{{info.id}}"
+        role="button"
+        aria-expanded="false"
+        aria-controls="collapse{{info.id}}"
+      >
+        + Add
+      </a>
+    </p>
+    <div class="collapse" id="collapse{{info.id}}">
+      <div class="card card-body z-3 position-absolute">
+        <form action="/playlist/addTrack" method="post">
+          <button
+            type="submit"
+            class="btn btn-danger btn-sm"
+          >
+            Name Playlist
+          </button>
+        </form>
+      </div>
+    </div>
+  {{else}}
+    <a type="button" href="/albums/{{info.id}}" class="btn btn-danger btn-sm">
+      View Albums
+    </a>
+  {{/if}}
+</div>

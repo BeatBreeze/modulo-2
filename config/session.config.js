@@ -23,7 +23,7 @@ module.exports.session = expressSession({
         .populate('playlists')
         .then((user) => {
           req.user = user;
-          console.log(user);
+          // console.log(user);
           res.locals.currentUser = user;
           next();
         })
