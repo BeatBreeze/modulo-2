@@ -56,7 +56,10 @@ module.exports.doEdit = (req, res, next) => {
     .catch((error) => {
       console.error(error);
       if (error instanceof mongoose.Error.ValidationError) {
-        res.render("music/editPlaylist", { user: req.body, errors: error.errors });
+        res.render("music/editPlaylist", {
+          user: req.body,
+          errors: error.errors,
+        });
       } else {
         next(error);
       }
@@ -64,17 +67,24 @@ module.exports.doEdit = (req, res, next) => {
 };
 
 module.exports.addTrack = (req, res, next) => {
-  console.log("Body", req.body)
-  console.log("Params", req.params)
-  // Playlist.create({
-  //   name: req.body.name,
-  //   tracks: [],
-  //   user: req.user.id,
-  // })
-  //   .then(() => res.redirect("/profile"))
-  //   .catch((error) => {
-  //     next(error);
-  //   });
+  let tracks = [];
+  Playlist.findById(req.params.idPlaylist)
+    .then((playlist) => {
+      playlist.tracks.map((idTrack) => idTrack === req.params.id ? null : tracks.push(idTrack));
+      tracks.push(req.params.id);
+    })
+    .then(() =>
+      Playlist.findByIdAndUpdate(req.params.idPlaylist, {
+        tracks: tracks,
+      })
+        .then(() => res.redirect("/profile"))
+        .catch((error) => {
+          next(error);
+        })
+    )
+    .catch((error) => {
+      next(error);
+    });
 };
 
 // DELETE

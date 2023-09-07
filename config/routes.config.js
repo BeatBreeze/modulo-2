@@ -22,7 +22,7 @@ router.get("/playlist", secure.isAuthenticated, playlist.create);
 router.post("/playlist", secure.isAuthenticated, playlist.doCreate);
 router.get("/playlist/edit", secure.isAuthenticated, playlist.edit);
 router.post("/playlist", secure.isAuthenticated, playlist.doEdit);
-router.post("/playlist/addTrack", secure.isAuthenticated, playlist.addTrack);
+router.post("/playlist/addTrack/:idPlaylist/:id", secure.isAuthenticated, playlist.addTrack);
 router.post("/playlist/delete",secure.isAuthenticated,playlist.delete);
 
 router.get("/search", spotify.search);

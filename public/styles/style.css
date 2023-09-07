@@ -29,3 +29,10 @@
   background-color: purple;
   color: white;
 }
+
+.addPlaylist:hover {
+  background-color: purple;
+  color: white;
+  padding: 0px 6px;
+  border-radius: 4px;
+}
