@@ -1,0 +1,12 @@
+{{#each users as |user|}}
+  <div class="card">
+    <h5 class="card-header">{{user.username}}</h5>
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+      <p class="card-text"></p>
+      <a href="/playlist/{{playlist._id}}" class="btn btn-primary">Follow</a>
+      <a href="#" class="btn btn-primary">Like</a>
+    </div>
+  </div>
+{{/each}}
+{{searchUser.username}}
