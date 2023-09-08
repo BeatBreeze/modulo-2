@@ -103,3 +103,26 @@ module.exports.oneGenres = (req, res) => {
       }
     );
 };
+
+module.exports.oneArtist = (req, res) => {
+  const httpHeader = res.req.rawHeaders.find((header) =>
+    header.startsWith("http")
+  );
+  let Artists;
+  spotifyApi
+    .getArtist(req.params.id)
+    .then(function (artist) {
+      Artists = artist.body;
+    })
+    .then(() => {
+      spotifyApi.getArtistAlbums(req.params.id).then((albums) => {
+        res.render("music/artists", {
+          Info: { Artists: Artists, Albums: albums.body.items },
+          httpHeader: httpHeader
+        });
+      });
+    })
+    .catch((err) =>
+      console.log("The error while searching artist occurred: ", err)
+    );
+};

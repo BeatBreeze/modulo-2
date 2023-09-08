@@ -1,0 +1,45 @@
+<div class="mb-5 mx-5">
+  <a href="{{httpHeader}}" class="btn btn-outline-light btn-lg border border-0">
+  <span class="fa fa-angle-left"></span> Back
+</a>
+  {{#if Info.Artists.images}}
+    {{#if Info.Artists.images.0.url}}
+      <img
+        src="{{Info.Artists.images.0.url}}"
+        class="card-img-top object-fit-contain imgList"
+        alt="{{Info.Artists.name}}"
+      />
+    {{else}}
+      <img
+        src="img/no-cover.png"
+        class="card-img-top object-fit-contain imgList"
+        alt="{{Info.Artists.name}}"
+      />
+    {{/if}}
+  {{else}}
+    <img
+      src="img/no-cover.png"
+      class="card-img-top object-fit-contain imgList"
+      alt="{{Info.Artists.name}}"
+    />
+  {{/if}}
+  <div class="text-center text-light">
+    <h1>{{Info.Artists.name}}</h1>
+    <p class="" >Generos</p>
+    <ul class="text-center">
+    {{#each Info.Artists.genres as |genre|}}
+    <a class="btn btn-link text-capitalize" href="/">{{genre}}</a>
+    {{/each}}
+    </ul>
+  </div>
+  <h1 class="text-light">ALBUMS</h1>
+  <div class='row row-cols-1 row-cols-md-6 g-5 text-center'>
+    {{#each Info.Albums as |album|}}
+      <div class='col'>
+        <div class='card border border-0'>
+          {{> artistAlbums info=album}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>

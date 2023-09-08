@@ -1,34 +1,33 @@
 <div class="m-5">
-  <a class="btn btn-primary me-2 fa fa-home mb-2" href="/"> Home</a>
-  <div class="container text-center">
+  <div class="container text-center text-light">
     {{!-- - ARTISTS --}}
-    <div class="px-2 border">
+    <div class="px-2 border border-0">
       <h3>ARTISTS</h3>
       <div class='row row-cols-2 row-cols-lg-6 g-2 g-lg-3'>
       {{#each artists.Artists as |artist|}}
-        <div class='col card border border-0 '>
+        <div class='col card border border-0 bg-transparent text-light'>
           {{> artistAlbum info=artist  isAlbum=true}}
         </div>
       {{/each}}
       </div>
     </div>
     {{!-- - ALBUMS --}}
-    <div class="px-2 border">
+    <div class="px-2 border border-0">
       <h3>ALBUMS</h3>
       <div class='row row-cols-2 row-cols-lg-6 g-2 g-lg-3'>
         {{#each artists.Albums as |artist|}}
-          <div class='col card border border-0'>
+          <div class='col card border border-0 bg-transparent text-light'>
             {{> artistAlbum info=artist  isAlbum=false}}
           </div>
         {{/each}}
       </div>
     </div>
-    {{!-- - ARTISTS --}}
-    <div class="px-2 border">
+    {{!-- - TRACKS --}}
+    <div class="px-2 border border-0 text-light">
       <h3>TRACKS</h3>
       <div class='row row-cols-2 row-cols-lg-6 g-2 g-lg-3'>
         {{#each artists.Tracks as |track|}}
-          <div class='col card border border-0'>
+          <div class='col card border border-0 bg-transparent text-light'>
             {{> track info=track isTrack=true}}
             <div class="text-middle">
               <div class="d-inline-flex gap-1">

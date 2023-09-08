@@ -1,3 +1,9 @@
+body {
+  background-image: url("/img/fondo-Beez.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
 .imgTop {
   width: 36px;
   /* margin-right: 6px; */
@@ -14,15 +20,22 @@
   height: 170px;
 }
 
+.barVertical {
+  background-color: transparent;
+}
 .navVertical {
   flex: content;
   position: absolute;
-  background-color: white;
+  background-color: transparent;
 }
 
 .navVertical a {
-  color: purple;
+  color: white;
   padding: 1rem;
+}
+
+.closeVertical{
+  color: white;
 }
 
 .navVertical a:hover {
@@ -33,6 +46,6 @@
 .addPlaylist:hover {
   background-color: purple;
   color: white;
-  padding: 0px 6px;
+  padding: 0px 4px;
   border-radius: 4px;
 }
