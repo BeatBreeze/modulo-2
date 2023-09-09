@@ -19,7 +19,15 @@ module.exports.doRegister = (req, res, next) => {
           },
         });
       } else {
-        return User.create(req.body).then(() => {
+        return User.create({
+          name: req.body.name,
+          username: req.body.username,
+          email: req.body.email,
+          password: req.body.password,
+          avatarURL: req.file
+            ? req.file.path
+            : `https://i.pravatar.cc/150?u=${req.body.email}`, // multer middleware is filling this field
+        }).then(() => {
           req.flash("data", JSON.stringify({ info: "Please login in" }));
           res.redirect("/login");
         });

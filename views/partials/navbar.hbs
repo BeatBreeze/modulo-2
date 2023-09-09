@@ -5,7 +5,7 @@
     <div class="d-flex">
       <button
         class="btn btn-light border border-0"
-        style="color: white; background-color: transparent;"
+        style="color: white; background-color: transparent; "
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#offcanvasScrolling"
@@ -13,21 +13,22 @@
       ><i class="fa fa-bars" aria-hidden="true"></i></button>
       <div
         class="offcanvas offcanvas-start barVertical"
+        style="color: white; width: 150px;"
         data-bs-scroll="true"
         data-bs-backdrop="false"
         tabindex="-1"
         id="offcanvasScrolling"
         aria-labelledby="offcanvasScrollingLabel"
       >
-        <div class="offcanvas-header">
+        <div class="offcanvas-header "data-bs-theme="dark">
           <button
             type="button"
-            class="btn-close closeVertical"
+            class="btn-close"
             data-bs-dismiss="offcanvas"
             aria-label="Close"
           ></button>
         </div>
-        <div class="offcanvas-body">
+        <div class="offcanvas-body" style="backdrop-filter: blur(10px); ">
           <ul class="nav flex-column navVertical">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">HOME</a>

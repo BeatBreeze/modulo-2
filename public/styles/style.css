@@ -11,6 +11,9 @@ body {
 .imgList {
   height: 170px;
 }
+.imgArtist {
+  height: 300px;
+}
 .carouselButton {
   width: 5%;
 }
@@ -30,16 +33,14 @@ body {
 }
 
 .navVertical a {
+  border-radius: 8px;
   color: white;
   padding: 1rem;
 }
 
-.closeVertical{
-  color: white;
-}
-
 .navVertical a:hover {
-  background-color: purple;
+  border-radius: 8px;
+  background-color: rgba(128, 0, 128, 0.705);
   color: white;
 }
 

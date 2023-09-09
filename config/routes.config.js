@@ -5,9 +5,10 @@ const spotify = require("../controllers/spotify.controller");
 const playlist = require("../controllers/playlist.controller");
 const secure = require("../middlewares/secure.mid");
 const followers = require ("../controllers/followersUser.controller");
+const upload = require("../config/multer.config");
 
 router.get("/register", users.register);
-router.post("/register", users.doRegister);
+router.post("/register", upload.single("avatarURL"), users.doRegister);
 router.get("/login", users.login);
 router.post("/login", users.doLogin);
 router.post("/logout", secure.isAuthenticated, users.logout);

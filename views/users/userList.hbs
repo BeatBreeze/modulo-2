@@ -1,12 +1,20 @@
-{{#each users as |user|}}
+{{#each users as |oneUser|}}
   <div class="card">
-    <h5 class="card-header">{{user.username}}</h5>
+    <h5 class="card-header">{{oneUser.user.username}}</h5>
     <div class="card-body">
       <h5 class="card-title"></h5>
       <p class="card-text"></p>
-      <a href="/playlist/{{playlist._id}}" class="btn btn-primary">Follow</a>
+      <div class='row row-cols-1 row-cols-md-4 g-2'>
+        {{#each oneUser.playlists as |playlist|}}
+        <div class='col'>
+          <div class='card border border-0'>
+            {{> playlist info=../playlist}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      <a href="/playlist/{{playlists.id}}" class="btn btn-primary">Follow</a>
       <a href="#" class="btn btn-primary">Like</a>
     </div>
   </div>
 {{/each}}
-{{searchUser.username}}

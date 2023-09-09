@@ -10,16 +10,16 @@
   </a> --}}
     <img
       src="{{info.images.0.url}}"
-      class="card-img-top object-fit-contain imgList"
+      class="card-img-top object-fit-contain imgList rounded"
       alt="{{info.name}}"
     />
   {{else}}
     <img
       src="img/no-cover.png"
-      class="card-img-top object-fit-contain imgList"
+      class="card-img-top object-fit-contain imgList rounded"
       alt="{{info.name}}"
     />
   {{/if}}
 {{else}}
-  <img src="img/no-cover.png" class="card-img-top object-fit-contain imgList" alt="{{info.name}}" />
+  <img src="img/no-cover.png" class="card-img-top object-fit-contain imgList rounded" alt="{{info.name}}" />
 {{/if}}
