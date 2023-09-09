@@ -3,7 +3,20 @@ const Playlist = require("../models/playlist.model");
 const mongoose = require("mongoose");
 
 module.exports.home = (req, res) => {
-  res.render("home", {});
+  spotifyApi
+    .getRecommendations({
+      min_popularity: 90
+    })
+    .then(
+      function (data) {
+        let recommendations = data.body;
+        res.render ("home",{recommendations} )
+        console.log(recommendations);
+      },
+      function (err) {
+        console.log("Something went wrong!", err);
+      }
+    );
 };
 // REGISTRO
 module.exports.register = (req, res, next) => res.render("users/register");

@@ -21,6 +21,7 @@ module.exports.session = expressSession({
     if (userId) {
       User.findById(userId)
         .populate('playlists')
+        .populate('followers')
         .then((user) => {
           req.user = user;
           // console.log(user);

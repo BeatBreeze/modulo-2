@@ -5,10 +5,10 @@ const Playlist = require("../models/playlist.model");
 
 module.exports.doFollowingUser = (req, res, next) => {
   FollowersUser.create({
-    user: req.user.username,
-    otherUser: req.body.username,
+    user: req.user.id,
+    otherUser: req.params.id,
   })
-    .then(() => res.redirect("/profile"))
+    .then(() => res.redirect("back"))
     .catch((error) => {
       // if (error instanceof mongoose.Error.ValidationError) {
       //   const errors = Object.keys(error.errors).reduce((errors, attr) => {
@@ -27,9 +27,7 @@ module.exports.doFollowingUser = (req, res, next) => {
 module.exports.searchUser = async (req, res, next) => {
   try {
     const searchRegex = new RegExp(req.query.searchUser, "i");
-
     const otherUsers = await User.find({ username: searchRegex });
-
     const usersAndPlaylists = [];
     for (const oneUser of otherUsers) {
       const playlists = await Playlist.find({ user: oneUser.id });
@@ -37,7 +35,8 @@ module.exports.searchUser = async (req, res, next) => {
     }
 
     if (usersAndPlaylists.length > 0) {
-      res.render("users/userList", { users: usersAndPlaylists });
+      
+    res.render("users/userList", { users: usersAndPlaylists, followersUser: req.user.followers });
     } else {
       res.redirect("/");
     }
@@ -45,4 +44,12 @@ module.exports.searchUser = async (req, res, next) => {
     console.error(error);
     res.redirect("/");
   }
+};
+// DELETE
+module.exports.delete = (req, res, next) => {
+  FollowersUser.findByIdAndDelete(req.param.id)
+    .then(() => {
+      res.redirect(`back`);
+    })
+    .catch(next);
 };

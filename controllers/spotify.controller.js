@@ -126,3 +126,21 @@ module.exports.oneArtist = (req, res) => {
       console.log("The error while searching artist occurred: ", err)
     );
 };
+module.exports.home = (req, res) => {
+  spotifyApi
+    .getRecommendations({
+      seed_genres: "chill,techno,house,metal,hardstyle",
+      min_popularity: 85,
+      limit: 10
+    })
+    .then(
+      function (data) {
+        let recommendations = data.body;
+        console.log(recommendations);
+        res.render("home",{recommendations : recommendations})
+      },
+      function (err) {
+        console.log("Something went wrong!", err);
+      }
+    );
+};

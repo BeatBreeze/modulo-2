@@ -52,6 +52,11 @@ userSchema.virtual("playlists", {
   localField: "_id",
   foreignField: "user",
 });
+userSchema.virtual("followers", {
+  ref: "follower",
+  localField: "_id",
+  foreignField: "user",
+});
 
 userSchema.pre("save", function (next) {
   const user = this;
