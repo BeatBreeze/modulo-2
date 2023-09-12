@@ -1,16 +1,47 @@
 <div class="m-5">
-  <a class="btn btn-link" href="/">Volver a home</a>
-  <ul class="list-group">
-    <li
-      class="list-group-item d-flex justify-content-around align-items-center text-bg-secondary"
-    >
-      <strong>Title</strong>
-      <span class="badge rounded-pill">
-        <strong>Listen</strong>
-      </span>
-    </li>
-    {{#each tracks as |track|}}
-      {{> trackPartial info=track}}
+  <a href="{{httpHeader}}" class="btn btn-outline-light btn-lg border border-0">
+    <span class="fa fa-angle-left"></span>
+    Back
+  </a>
+  {{#if AlbumInfo.images}}
+    {{#if AlbumInfo.images.0.url}}
+      <img
+        src="{{AlbumInfo.images.0.url}}"
+        class="card-img-top object-fit-contain imgArtist"
+        alt="{{AlbumInfo.name}}"
+      />
+    {{else}}
+      <img
+        src="img/no-cover.png"
+        class="card-img-top object-fit-contain imgArtist"
+        alt="{{AlbumInfo.name}}"
+      />
+    {{/if}}
+  {{else}}
+    <img
+      src="img/no-cover.png"
+      class="card-img-top object-fit-contain imgArtist"
+      alt="{{AlbumInfo.name}}"
+    />
+  {{/if}}
+  <div class="text-center text-light">
+    
+    <h1>{{AlbumInfo.name}}</h1>
+    <p class="m-0">{{AlbumInfo.type}} · {{AlbumInfo.release_date}}</p>
+
+    <ul class="d-flex justify-content-center p-0 m-0">
+      {{#each AlbumInfo.artists as |artist|}}
+        <a class="btn btn-link text-capitalize" href="../artist/{{artist.id}}">{{artist.name}}</a>
+      {{/each}}
+    </ul>
+    <ul class="d-flex justify-content-center p-0 m-0">
+      {{#each AlbumInfo.genres as |genre|}}
+      <a class="btn btn-link text-capitalize" href="../genre/{{genre}}">{{genre}}</a>
+      {{/each}}
+    </ul>
+    <p class="d-flex justify-content-end">Total Tracks: {{AlbumInfo.total_tracks}}</p>
+  </div>
+   {{#each tracks as |track|}}
+      {{> trackPlayer info=track}}
     {{/each}}
-  </ul>
-</div>
+</div> 

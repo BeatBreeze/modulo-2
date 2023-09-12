@@ -16,6 +16,14 @@ body {
 .imgArtist {
   height: 300px;
 }
+.imgTrack {
+  height: 60px;
+}
+
+.TracksGrid {
+  display: grid;
+}
+
 .carouselButton {
   width: 5%;
 }
@@ -47,7 +55,13 @@ body {
 }
 
 .addPlaylist:hover {
-  background-color: purple;
+  background-color: #800080;
+  color: white;
+  padding: 0px 4px;
+  border-radius: 4px;
+}
+.addPlaylist {
+  background-color: transparent;
   color: white;
   padding: 0px 4px;
   border-radius: 4px;

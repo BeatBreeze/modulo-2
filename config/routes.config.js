@@ -36,16 +36,12 @@ router.post("/playlist/addTrack/:idPlaylist/:id", secure.isAuthenticated, playli
 router.post("/playlist/delete",secure.isAuthenticated,playlist.delete);
 
 router.get("/search", spotify.search);
-router.get("/albums/:id", spotify.albums);
+router.get("/albums/:id", spotify.tracks);
 router.get("/albums/:id/tracks", spotify.tracks);
 
 router.get("/genres", spotify.genres); // Todos los generos
 router.get("/genres/:id", spotify.oneGenres); // Genero especifico
-// router.get("/artists", spotify.artists); // Todos los artista
-router.get("/artist/:id", spotify.oneArtist); // Genero especifico
-
-// Seguir otros usuarios si da la vida
-// router.get("/users", users.list);
+router.get("/artist/:id", spotify.oneArtist); // Artista especifico
 
 module.exports = router;
 

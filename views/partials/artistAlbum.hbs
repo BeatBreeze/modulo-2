@@ -1,23 +1,12 @@
-  {{#if isAlbum}}
-{{> imgButton info=info refButton="/artist/{{info.id}}"}}
-<div class="card-body text-middle">
-  <p class="card-title"><strong>{{info.name}}</strong></p>
-    <p>{{info.release_date}}</p>
-    <a
-      type="button"
-      href="/artist/{{info.id}}"
-      class="btn btn btn-outline-light btn-sm"
-    >
-      View More
-    </a>
-</div>
-  {{else}}
-  {{> imgButton info=info refButton="/albums/{{info.id}}"}}
+{{#if isAlbum}}
+  {{> imgButton info=info isAlbum=false}}
   <div class="card-body text-middle">
-  <p class="card-title"><strong>{{info.name}}</strong></p>
-    <a type="button" href="/albums/{{info.id}}" class="btn btn btn-outline-light btn-sm">
-      View Albums
-    </a>
-</div>
-
-  {{/if}}
+    <p class="card-title"><strong>{{info.name}}</strong></p>
+      <p>{{info.release_date}}</p>
+  </div>
+{{else}}
+    {{> imgButton info=info isAlbum=true}}
+    <div class="card-body text-middle">
+      <p class="card-title"><strong>{{info.name}}</strong></p>
+    </div>
+{{/if}}

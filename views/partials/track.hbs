@@ -1,63 +1,36 @@
-{{#if info.images}}
-  {{#if info.images.0.url}}
-    {{!-- <a href="/movies/{{movie.id}}">
-  <img
-    src="{{movie.image}}"
-    class="card-img-top object-fit-contain"
-    href="/movies/{{movie.id}}"
-    alt="{{movie.title}}"
-  />
-</a> --}}
-    <img
-      src="{{info.images.0.url}}"
-      class="card-img-top object-fit-contain imgList"
-      alt="{{info.name}}"
-    />
-  {{else}}
-    <img
-      src="img/no-cover.png"
-      class="card-img-top object-fit-contain imgList"
-      alt="{{info.name}}"
-    />
-  {{/if}}
-{{else}}
-  <img
-    src="img/no-cover.png"
-    class="card-img-top object-fit-contain imgList"
-    alt="{{info.name}}"
-  />
-{{/if}}
-
-<div class="card-body text-middle">
+<div class="text-middle m-0 d-flex flex-column">
   <p class="card-title"><strong>{{info.name}}</strong></p>
-
-  <p>{{info.release_date}}</p>
-  <a
-    type="button"
-    href="/albums/{{info.id}}/tracks"
-    class="btn btn-danger btn-sm"
-  >
-    Play Track
+  {{!-- <a
+    class="btn btn-light text-capitalize"
+    href="../album/{{info.album.id}}"
+  >{{info.album.name}}</a> --}}
+  <a class="btn btn-outline-light btn-lg border border-0 p-2" href="../album/{{info.album.id}}">
+    <img
+      src="/img/album.png"
+      alt="Logo"
+      width="25"
+      height="25"
+      class="d-inline-block align-text-top"
+    />
+    {{info.album.name}}
   </a>
+  <div class="d-flex justify-content-center">
+  {{#each info.artists as |artist|}}
+    <a
+      class="btn btn-outline-light btn-lg border border-0 p-2"
+      href="../artist/{{artist.id}}"
+    >
+      <img
+        src="/img/artist.png"
+        alt="Logo"
+        width="24"
+        height="24"
+        class="d-inline-block align-text-top"
+      />
+      {{artist.name}}
+    </a>
+  {{/each}}
+  </div>
+  
+  <p>{{yearDate info.album.release_date}}</p>
 </div>
-{{!-- <li class="list-group-item d-flex justify-content-between align-items-center">
-  <strong>{{info.name}}</strong>
-  <span class="badge rounded-pill">
-    <figure class="d-flex align-items-center">
-      {{#if info.preview_url}}
-        <audio controls src="{{info.preview_url}}">
-        </audio>
-        <a href="{{info.preview_url}}" class="">
-          <img
-            src="/images/download-icon.png"
-            id="imgTracks"
-            alt="Download"
-          />
-        </a>
-      {{else}}
-        <audio controls src="">
-        </audio>
-      {{/if}}
-    </figure>
-  </span>
-</li> --}}

@@ -5,6 +5,9 @@ hbs.registerPartials(`${__dirname}/../views/partials`);
 hbs.registerHelper("prettyDate", (date) => {
   return date.toLocaleDateString("es-ES", {});
 });
+hbs.registerHelper("yearDate", (date) => {
+  return date.split("-")[0];
+});
 hbs.registerHelper('arrayEquals', (array1, array2, options) => {
 
   // Función para comparar dos arrays
