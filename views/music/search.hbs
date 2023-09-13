@@ -5,7 +5,7 @@
       <h3>ARTISTS</h3>
       <div class='row row-cols-2 row-cols-lg-6 g-2 g-lg-3'>
         {{#each artists.Artists as |artist|}}
-          <button class='col card border border-0 bg-transparent text-light' onclick='window.location.href="artist/{{artist.id}}"'>
+          <button class='col card border border-0 bg-transparent text-light d-flex align-items-center pt-2 pb-0' onclick='window.location.href="artist/{{artist.id}}"'>
             {{> artistAlbum info=artist  isAlbum=true}}
           </button>          
         {{/each}}
@@ -86,9 +86,9 @@
     <div class="px-2 border border-0">
       <h3>ALBUMS</h3>
       <div class='row row-cols-2 row-cols-lg-6 g-2 g-lg-3'>
-        {{#each artists.Albums as |artist|}}
-          <button class='col card border border-0 bg-transparent text-light' onclick='window.location.href="albums/{{artist.id}}"'>
-            {{> artistAlbum info=artist  isAlbum=false}}
+        {{#each artists.Albums as |album|}}
+          <button class='col card border border-0 bg-transparent text-light d-flex align-items-center pt-2 pb-0' onclick='window.location.href="albums/{{album.id}}"'>
+            {{> artistAlbum info=album  isAlbum=false}}
           </button>
         {{/each}}
       </div>
@@ -98,38 +98,37 @@
       <h3>TRACKS</h3>
       <div class="row" >
         {{#each artists.Tracks as |track|}}
-          <div class='col-4 card border border-0 bg-transparent text-light px-2 pb-4'>
+          <div class='col-4 card border border-0 bg-transparent text-light px-2 pb-2 pt-2'>
             <div class="d-flex flex-column justify-content-center align-items-center">
-            {{> trackPlayer info=track}}
-            {{> track info=track isTrack=true}}
-            {{!-- - Add Playlist --}}
-            <div class="text-middle">
-              <div class="d-inline-flex gap-1">
-                <a
-                  class="addPlaylist"
-                  data-bs-toggle="collapse"
-                  href="#collapse{{track.id}}"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="collapse{{track.id}}"
-                >
-                  <i class = "fa fa-list-ul fa-lg p-2"></i>
-                </a>
-              </div>
-              <div class="collapse" id="collapse{{track.id}}">
-                <div class="card card-body border border-0">
-                  {{#each ../currentUser.playlists as |playlist|}}
-                    <form action="/playlist/addTrack/{{playlist.id}}/{{track.id}}" method="post">
-                      <button type="submit" class="btn btn-outline-light border border-0">
-                        +{{playlist.name}}
-                      </button>
-                    </form>
-                  {{/each}}
+              {{> trackPlayer info=track}}
+              {{> track info=track isTrack=true}}
+              {{!-- - Add Playlist --}}
+              <div class="text-middle">
+                <div class="d-inline-flex gap-1">
+                  <a
+                    class="addPlaylist"
+                    data-bs-toggle="collapse"
+                    href="#collapse{{track.id}}"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapse{{track.id}}"
+                  >
+                    <i class = "fa fa-list-ul fa-lg p-2"></i>
+                  </a>
+                </div>
+                <div class="collapse" id="collapse{{track.id}}">
+                  <div class="card card-body border border-0">
+                    {{#each ../currentUser.playlists as |playlist|}}
+                      <form action="/playlist/addTrack/{{playlist.id}}/{{track.id}}" method="post">
+                        <button type="submit" class="btn btn-outline-light border border-0 px-5">
+                          +{{playlist.name}}
+                        </button>
+                      </form>
+                    {{/each}}
+                  </div>
                 </div>
               </div>
             </div>
-            </div>
-            
           </div>
         {{/each}}
       </div>

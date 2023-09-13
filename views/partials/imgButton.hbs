@@ -2,27 +2,27 @@
 {{#if isAlbum}}
   {{#if info.images}}
     {{#if info.images.0.url}}
-      <a href="albums/{{info.id}}">
+      <a href="../albums/{{info.id}}">
         <img
           src="{{info.images.0.url}}"
-          class="card-img-top object-fit-contain imgList"
+          class="card-img-top object-fit-cover imgList"
           alt="{{info.name}}"
         />
       </a>
     {{else}}
-      <a href="albums/{{info.id}}">
+      <a href="../albums/{{info.id}}">
         <img
           src="img/no-cover.png"
-          class="card-img-top object-fit-contain imgList rounded"
+          class="card-img-top object-fit-cover imgList"
           alt="{{info.name}}"
         />
       </a>
     {{/if}}
   {{else}}
-    <a href="albums/{{info.id}}">
+    <a href="../albums/{{info.id}}">
       <img
         src="img/no-cover.png"
-        class="card-img-top object-fit-contain imgList rounded"
+        class="card-img-top object-fit-cover imgList"
         alt="{{info.name}}"
       />
     </a>
@@ -31,27 +31,27 @@
 {{else}}
   {{#if info.images}}
     {{#if info.images.0.url}}
-      <a href="artist/{{info.id}}">
+      <a href="../artist/{{info.id}}">
         <img
           src="{{info.images.0.url}}"
-          class="card-img-top object-fit-contain imgList"
+          class="card-img-top object-fit-cover imgList"
           alt="{{info.name}}"
         />
       </a>
     {{else}}
-      <a href="artist/{{info.id}}">
+      <a href="../artist/{{info.id}}">
         <img
           src="img/no-cover.png"
-          class="card-img-top object-fit-contain imgList rounded"
+          class="card-img-top object-fit-cover imgList"
           alt="{{info.name}}"
         />
       </a>
     {{/if}}
   {{else}}
-    <a href="artist/{{info.id}}">
+    <a href="../artist/{{info.id}}">
       <img
         src="img/no-cover.png"
-        class="card-img-top object-fit-contain imgList rounded"
+        class="card-img-top object-fit-cover imgList"
         alt="{{info.name}}"
       />
     </a>
