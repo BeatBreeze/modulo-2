@@ -1,7 +1,7 @@
 const FollowersUser = require("../models/follower.user.model");
-const mongoose = require("mongoose");
 const User = require("../models/user.model");
 const Playlist = require("../models/playlist.model");
+const PlaylistFollower = require("../models/follower.playlist.model");
 
 module.exports.doFollowingUser = (req, res, next) => {
   FollowersUser.create({
@@ -10,33 +10,44 @@ module.exports.doFollowingUser = (req, res, next) => {
   })
     .then(() => res.redirect("back"))
     .catch((error) => {
-      // if (error instanceof mongoose.Error.ValidationError) {
-      //   const errors = Object.keys(error.errors).reduce((errors, attr) => {
-      //     errors[attr] = error.errors[attr].message
-      //     return errors;
-      //   }, {})
-
-      //   req.flash('data', JSON.stringify({ playlist: req.body, errors: errors }));
-      //   res.redirect('/profile');
-      // } else {
       next(error);
-      // }
     });
 };
 
 module.exports.searchUser = async (req, res, next) => {
   try {
     const searchRegex = new RegExp(req.query.searchUser, "i");
-    const otherUsers = await User.find({ username: searchRegex });
+    const allFindUsers = await User.find({ username: searchRegex });
+    const currentIsFollowerPlaylists = await PlaylistFollower.find({
+      user: req.user.id,
+    });
+    const currentIsFollower = await FollowersUser.find({
+      user: req.user.id,
+    });
     const usersAndPlaylists = [];
-    for (const oneUser of otherUsers) {
+    for (const oneUser of allFindUsers) {
       const playlists = await Playlist.find({ user: oneUser.id });
-      usersAndPlaylists.push({ playlists, user: oneUser });
+      const playlistsData = playlists.map((i) => {
+        const isFollowing = currentIsFollowerPlaylists.some(
+          (f) => f.playlist.toString() === i.id.toString()
+        );
+        return { playlist: i, isFollowing };
+      });
+      const isFollowingUser =
+        currentIsFollower &&
+        currentIsFollower.some(
+          (i) => i.otherUser.toString() === oneUser.id.toString()
+        );
+      usersAndPlaylists.push({
+        playlists: playlistsData,
+        user: oneUser,
+        isFollowingUser: isFollowingUser,
+      });
     }
-
     if (usersAndPlaylists.length > 0) {
-      
-    res.render("users/userList", { users: usersAndPlaylists, followersUser: req.user.followers });
+      res.render("users/userList", {
+        users: usersAndPlaylists.filter((i) => i.user.id !== req.user.id),
+      });
     } else {
       res.redirect("/");
     }
@@ -47,7 +58,10 @@ module.exports.searchUser = async (req, res, next) => {
 };
 // DELETE
 module.exports.delete = (req, res, next) => {
-  FollowersUser.findByIdAndDelete(req.param.id)
+  FollowersUser.findOneAndDelete({
+    user: req.user.id,
+    otherUser: req.params.id,
+  })
     .then(() => {
       res.redirect(`back`);
     })

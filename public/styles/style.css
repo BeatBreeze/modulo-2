@@ -12,7 +12,7 @@ body {
 }
 .imgList {
   width: 170px;
-	height: 170px;
+  height: 170px;
   border-radius: 8px;
 }
 .imgArtist {
@@ -22,6 +22,12 @@ body {
 }
 .imgTrack {
   height: 60px;
+}
+
+.iconDelete {
+  top: 17px;
+  right: -18px;
+  padding: 7px 9px 6px 10px;
 }
 
 .TracksGrid {
@@ -89,4 +95,17 @@ body {
   margin-top: 10px;
   border: 1px solid white;
   border-radius: 8px;
+}
+
+.btn-purple {
+  background-color: white; /* Fondo blanco*/
+  color: purple; /*Texto morado*/
+  border: none; /*Elimina el borde*/
+  font-weight: bold; /* Texto en negrita*/
+}
+
+.btn-purple:hover {
+  background-color: purple;
+  color: white;
+  font-weight: bold;
 }

@@ -1,6 +1,23 @@
+<div class="">
 {{#each users as |oneUser|}}
   <div class="card">
     <h5 class="card-header">{{oneUser.user.username}}</h5>
+      {{#if oneUser.isFollowingUser}}
+        <form
+          method="POST"
+          action="/addFollowers/{{oneUser.user.id}}/delete"
+        >
+          <button type="submit" class="btn btn-primary"><i
+              class="fa fa-user-times"
+            ></i></button>
+        </form>
+      {{else}}
+        <form method="POST" action="/addFollowers/{{oneUser.user.id}}">
+          <button type="submit" class="btn btn-primary"><i
+              class="fa fa-user-plus"
+            ></i></button>
+        </form>
+      {{/if}}
     <div class="card-body">
       <h5 class="card-title"></h5>
       <p class="card-text"></p>
@@ -8,25 +25,13 @@
         {{#each oneUser.playlists as |playlist|}}
         <div class='col'>
           <div class='card border border-0'>
-            {{> playlist info= playlist}}
+            {{> playlist info=playlist isProfile=false}}
           </div>
         </div>
         {{/each}}
       </div>
-      {{#if followersUser}} 
-      <form method ="POST" action = "/addFollowers/{{oneUser.user.id}}" >
-      <button type= "submit" class="btn btn-primary">Follow</button></form>
-       {{else}}<form method ="POST" action = "/addFollowers/{{oneUser.user.id}}" >
-      <button type= "submit" class="btn btn-primary">Follow</button></form>
-      {{/if}}
-      <a href="#" class="btn btn-primary">Like</a>
-      {{../actualUser}}
     </div>
   </div>
-  {{!-- {{#if (arrayEquals oneUser.playlists followersUser)}}
-  Verdadero
-{{else}}
-  Falso
-{{/if}} --}}
 {{/each}}
+</div>
 

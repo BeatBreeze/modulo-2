@@ -1,13 +1,30 @@
+const SpotifyWebApi = require("spotify-web-api-node");
 const Playlist = require("../models/playlist.model");
 const mongoose = require("mongoose");
+const spotifyApi = new SpotifyWebApi({
+  clientId: process.env.CLIENT_SPOTIFY_ID,
+  clientSecret: process.env.CLIENT_SPOTIFY_SECRET,
+});
+
+spotifyApi
+  .clientCredentialsGrant()
+  .then((data) => {
+    spotifyApi.setAccessToken(data.body["access_token"]);
+  })
+  .catch((err) =>
+    console.log("The error while searching artists occurred: ", err)
+  );
 
 module.exports.create = (req, res, next) => res.render("music/newPlaylist");
 
 module.exports.doCreate = (req, res, next) => {
   Playlist.create({
-    name: req.body.name,
     tracks: [],
     user: req.user.id,
+    imgPlaylist: req.file
+      ? req.file.path
+      : `https://i.pravatar.cc/150?u=${req.body.email}`, // multer middleware is filling this field
+    name: req.body.name,
   })
     .then(() => res.redirect("/profile"))
     .catch((error) => {
@@ -70,7 +87,9 @@ module.exports.addTrack = (req, res, next) => {
   let tracks = [];
   Playlist.findById(req.params.idPlaylist)
     .then((playlist) => {
-      playlist.tracks.map((idTrack) => idTrack === req.params.id ? null : tracks.push(idTrack));
+      playlist.tracks.map((idTrack) =>
+        idTrack === req.params.id ? null : tracks.push(idTrack)
+      );
       tracks.push(req.params.id);
     })
     .then(() =>
@@ -87,9 +106,26 @@ module.exports.addTrack = (req, res, next) => {
     });
 };
 
+module.exports.list = async (req, res, next) => {
+  try {
+    const playlist = await Playlist.findById(req.params.id);
+    const trackPromises = playlist.tracks.map(async (i) => {
+      const response = await spotifyApi.getTrack(i);
+      return response.body;
+    });
+    const trackInfo = await Promise.all(trackPromises);
+    res.render("music/playlists", {
+      tracks: trackInfo,
+      Info: playlist,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // DELETE
 module.exports.delete = (req, res, next) => {
-  Playlist.findByIdAndDelete(req.user.id)
+  Playlist.findByIdAndDelete(req.params.id)
     .then(() => {
       res.redirect(`/profile`);
     })
