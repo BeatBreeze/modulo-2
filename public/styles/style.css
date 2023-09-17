@@ -24,6 +24,17 @@ body {
   height: 60px;
 }
 
+.imgListPlaylist {
+  height: 170px;
+  border-radius: 8px;
+}
+
+.imgListPlaylistUsers {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+}
+
 .iconDelete {
   top: 17px;
   right: -18px;
@@ -107,5 +118,18 @@ body {
 .btn-purple:hover {
   background-color: purple;
   color: white;
+  font-weight: bold;
+}
+
+.btn-purple-follow {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+.btn-purple-follow:hover {
+  background-color: white;
+  color: purple;
   font-weight: bold;
 }

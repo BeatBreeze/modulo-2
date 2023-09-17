@@ -27,20 +27,25 @@ module.exports.searchUser = async (req, res, next) => {
     const usersAndPlaylists = [];
     for (const oneUser of allFindUsers) {
       const playlists = await Playlist.find({ user: oneUser.id });
-      const playlistsData = playlists.map((i) => {
+      const playlistsData = playlists.map((i, index) => {
         const isFollowing = currentIsFollowerPlaylists.some(
           (f) => f.playlist.toString() === i.id.toString()
         );
-        return { playlist: i, isFollowing };
-      });
+        return index <= 1
+          ? { playlist: i, isFollowing }
+          : null;
+      }).filter((f) => f !== null);
       const isFollowingUser =
         currentIsFollower &&
         currentIsFollower.some(
           (i) => i.otherUser.toString() === oneUser.id.toString()
         );
+      const followers = await FollowersUser.find({ otherUser: oneUser.id });
       usersAndPlaylists.push({
+        numPlaylist: playlists && playlists.length,
         playlists: playlistsData,
         user: oneUser,
+        followers: followers && followers.length,
         isFollowingUser: isFollowingUser,
       });
     }

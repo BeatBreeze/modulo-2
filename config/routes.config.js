@@ -19,6 +19,7 @@ router.get("/profile", secure.isAuthenticated, users.profile);
 router.get("/profile/edit", secure.isAuthenticated, users.edit);
 router.post("/profile", secure.isAuthenticated, users.doEdit);
 router.post("/profile/delete", secure.isAuthenticated, users.delete);
+router.get("/user/:id", secure.isAuthenticated, users.otherUser);
 
 router.get("/searchUser", secure.isAuthenticated, followers.searchUser);
 router.post("/addFollowers/:id", secure.isAuthenticated, followers.doFollowingUser);

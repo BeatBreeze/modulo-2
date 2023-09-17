@@ -5,31 +5,27 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-3 d-flex justify-content-center align-items-start">
-                <img src="{{user.avatarURL}}" alt="User Profile Image" class="img-fluid rounded-circle">
+                <img src="{{user.user.avatarURL}}" alt="User Profile Image" class="img-fluid rounded-circle">
               </div>
               <div class="col-md-9">
                 <div class="d-flex justify-content-between">
-                  <h5 class="card-title">@{{user.username}}</h5>
-                  <a class="btn btn-outline-light btn-lg border border-0" href="/profile/edit"><i class="fa fa-pencil"></i></a>
+                  <h5 class="card-title">@{{user.user.username}}</h5>
                 </div>                
-                <p class="card-text">Name: {{user.name}}</p>
-                <p class="card-text">Email: {{user.email}}</p>
-                <p class="card-text">Register: {{prettyDate user.createdAt}}</p>
+                <p class="card-text">Name: {{user.user.name}}</p>
+                <p class="card-text">Email: {{user.user.email}}</p>
+                <p class="card-text">Register: {{prettyDate user.user.createdAt}}</p>
                 <ul class="list-unstyled">
                   <li>Playlists: {{user.playlists.length}}</li>
                 </ul>
                 <hr>
                 <div class="d-flex mb-4 justify-content-between align-items-center">
                   <h2 class="fw-bolder">Playlists</h2>
-                  <a class="btn btn-outline-light btn-lg border border-0 fs-6" href="/playlist">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Add
-                  </a>
                 </div>                
                 <div class='row row-cols-1 row-cols-md-4 g-2'>
                   {{#each user.playlists as |playlist|}}
                   <div class='col'>
-                      <div type="button" class='card border border-0 bg-transparent text-light' onclick='window.location.href="/playlist/{{playlist.id}}"'>
-                      {{> playlist info=playlist isProfile=true}}
+                      <div type="button" class='card border border-0 bg-transparent text-light' onclick='window.location.href="/playlist/{{playlist.playlist.id}}"'>
+                      {{> playlist info=playlist isProfile=true isUserProfile=true}}
                       </div>
                   </div>
                   {{/each}}

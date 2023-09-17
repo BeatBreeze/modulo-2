@@ -1,133 +1,147 @@
 {{#if isProfile}}
   {{! PROFILE }}
   <div>
-    {{#if info.imgPlaylist}}
-      {{#if info.imgPlaylist}}
-        <div class="position-relative">
-          <form
-            method="POST"
-            class="text-center"
-            action="/playlist/{{info.id}}/delete"
-          >
-            <button
-              type="submit"
-              class="btn btn-outline-danger btn-lg fa-lg border border-0 position-absolute translate-middle iconDelete"
-            ><i class="fa fa-trash-o"></i></button>
-          </form>
-          <a href="/playlist/{{info.id}}">
-            <img
-              src="{{info.imgPlaylist}}"
-              class="card-img-top object-fit-cover"
-              href="/playlist/{{info.id}}"
-              alt="{{info.name}}"
-            />
-          </a>
-        </div>
-      {{else}}
-        <div class="position-relative">
-          <form
-            method="POST"
-            class="text-center"
-            action="/playlist/{{info.id}}/delete"
-          >
-            <button
-              type="submit"
-              class="btn btn-outline-danger btn-lg fa-lg border border-0 position-absolute translate-middle iconDelete"
-            ><i class="fa fa-trash-o"></i></button>
-          </form>
-          <a href="/playlist/{{info.id}}">
-            <img
-              src="img/no-cover.png"
-              class="card-img-top object-fit-cover"
-              href="/playlist/{{info.id}}"
-              alt="{{info.name}}"
-            />
-          </a>
-        </div>
-      {{/if}}
-    {{else}}
-      <div class="position-relative">
+    {{#if isUserProfile}}
+        {{#if info.playlist.imgPlaylist}}
+            <a href="/playlist/{{info.playlist.id}}">
+              <img
+                src="{{info.playlist.imgPlaylist}}"
+                class="card-img-top object-fit-cover imgListPlaylist"
+                href="/playlist/{{info.playlist.id}}"
+                alt="{{info.playlist.name}}"
+              />
+            </a>
+        {{else}}
+            <a href="/playlist/{{info.playlist.id}}">
+              <img
+                src="img/no-cover.png"
+                class="card-img-top object-fit-cover imgListPlaylist"
+                href="/playlist/{{info.playlist.id}}"
+                alt="{{info.playlist.name}}"
+              />
+            </a>
+        {{/if}}
+      {{! TEXT }}
+      <div class="card-body text-middle d-flex justify-content-between mb-0 pb-0">
+        <p class="card-title"><strong>{{info.playlist.name}}</strong></p>
+        {{#if info.isFollowing}}
         <form
           method="POST"
-          class="text-center"
-          action="/playlist/{{info.id}}/delete"
+          action="/addPlaylistFollower/{{info.playlist.id}}/delete"
         >
-          <button
-            type="submit"
-            class="btn btn-outline-danger btn-lg fa-lg border border-0 position-absolute translate-middle iconDelete"
-          ><i class="fa fa-trash-o"></i></button>
+          <button type="submit" class="btn btn-sm border border-0 btn-purple-follow"><i
+              class="fa fa-heart"
+            ></i></button>
         </form>
-        <a href="/playlist/{{info.id}}">
-          <img
-            src="img/no-cover.png"
-            class="card-img-top object-fit-cover"
-            href="/playlist/{{info.id}}"
-            alt="{{info.name}}"
-          />
-        </a>
+      {{else}}
+        <form method="POST" action="/addPlaylistFollower/{{info.playlist.id}}">
+          <button type="submit" class="btn btn-sm border border-0 btn-purple-follow"><i
+              class="fa fa-heart-o"
+            ></i></button>
+        </form>
+      {{/if}}
+      </div>
+      <p class="d-flex justify-content-center mt-0">{{info.playlist.tracks.length}} tracks</p>
+    {{else}}
+      {{#if info.imgPlaylist}}
+          <div class="position-relative">
+            <form
+              method="POST"
+              class="text-center"
+              action="/playlist/{{info.id}}/delete"
+            >
+              <button
+                type="submit"
+                class="btn btn-outline-danger btn-lg fa-lg border border-0 position-absolute translate-middle iconDelete"
+              ><i class="fa fa-trash-o"></i></button>
+            </form>
+            <a href="/playlist/{{info.id}}">
+              <img
+                src="{{info.imgPlaylist}}"
+                class="card-img-top object-fit-cover imgListPlaylist"
+                href="/playlist/{{info.id}}"
+                alt="{{info.name}}"
+              />
+            </a>
+          </div>
+        {{else}}
+          <div class="position-relative">
+            <form
+              method="POST"
+              class="text-center"
+              action="/playlist/{{info.id}}/delete"
+            >
+              <button
+                type="submit"
+                class="btn btn-outline-danger btn-lg fa-lg border border-0 position-absolute translate-middle iconDelete"
+              ><i class="fa fa-trash-o"></i></button>
+            </form>
+            <a href="/playlist/{{info.id}}">
+              <img
+                src="img/no-cover.png"
+                class="card-img-top object-fit-cover imgListPlaylist"
+                href="/playlist/{{info.id}}"
+                alt="{{info.name}}"
+              />
+            </a>
+          </div>
+        {{/if}}
+      {{! TEXT }}
+      <div class="card-body text-middle">
+        <p class="card-title"><strong>{{info.name}}</strong></p>
       </div>
     {{/if}}
-    <div class="card-body text-middle">
-      <p class="card-title"><strong>{{info.name}}</strong></p>
-    </div>
   </div>
 {{else}}
   {{! SEARCH USER }}
-  <div>
-    {{#if info.playlist.imgPlaylist}}
+    <div class="card-body text-middle d-flex justify-content-between p-1">
       {{#if info.playlist.imgPlaylist}}
-        <div class="position-relative">
+      {{#if info.playlist.imgPlaylist}}
           <a href="/playlist/{{info.playlist.id}}">
             <img
               src="{{info.playlist.imgPlaylist}}"
-              class="card-img-top object-fit-cover"
+              class="card-img-top object-fit-cover imgListPlaylistUsers"
               href="/playlist/{{info.playlist.id}}"
               alt="{{info.playlist.name}}"
             />
           </a>
-        </div>
       {{else}}
-        <div class="position-relative">
           <a href="/playlist/{{info.playlist.id}}">
             <img
               src="img/no-cover.png"
-              class="card-img-top object-fit-cover"
+              class="card-img-top object-fit-cover imgListPlaylistUsers"
               href="/playlist/{{info.playlist.id}}"
               alt="{{info.playlist.name}}"
             />
           </a>
-        </div>
       {{/if}}
     {{else}}
-      <div class="position-relative">
         <a href="/playlist/{{info.playlist.id}}">
           <img
             src="img/no-cover.png"
-            class="card-img-top object-fit-cover"
+            class="card-img-top object-fit-cover imgListPlaylistUsers"
             href="/playlist/{{info.playlist.id}}"
             alt="{{info.playlist.name}}"
           />
         </a>
-      </div>
     {{/if}}
-    <div class="card-body text-middle">
+      {{! TEXT & BUTTON FOLLOW/UNFOLLOW }}
       <p class="card-title"><strong>{{info.playlist.name}}</strong></p>
       {{#if info.isFollowing}}
         <form
           method="POST"
           action="/addPlaylistFollower/{{info.playlist.id}}/delete"
         >
-          <button type="submit" class="btn btn-primary"><i
+          <button type="submit" class="btn btn-sm border border-0 btn-purple-follow"><i
               class="fa fa-heart"
             ></i></button>
         </form>
       {{else}}
         <form method="POST" action="/addPlaylistFollower/{{info.playlist.id}}">
-          <button type="submit" class="btn btn-primary"><i
+          <button type="submit" class="btn btn-sm border border-0 btn-purple-follow"><i
               class="fa fa-heart-o"
             ></i></button>
         </form>
       {{/if}}
     </div>
-  </div>
 {{/if}}

@@ -1,5 +1,6 @@
 const SpotifyWebApi = require("spotify-web-api-node");
 const Playlist = require("../models/playlist.model");
+const PlaylistFollower = require("../models/follower.playlist.model");
 const mongoose = require("mongoose");
 const spotifyApi = new SpotifyWebApi({
   clientId: process.env.CLIENT_SPOTIFY_ID,
@@ -23,7 +24,7 @@ module.exports.doCreate = (req, res, next) => {
     user: req.user.id,
     imgPlaylist: req.file
       ? req.file.path
-      : `https://i.pravatar.cc/150?u=${req.body.email}`, // multer middleware is filling this field
+      : `https://res.cloudinary.com/dznwlaen6/image/upload/v1694967203/beatBreeze/xr78hxikr4qk57vex1zb.png`, // multer middleware is filling this field
     name: req.body.name,
   })
     .then(() => res.redirect("/profile"))
@@ -107,16 +108,23 @@ module.exports.addTrack = (req, res, next) => {
 };
 
 module.exports.list = async (req, res, next) => {
+  const httpHeader = res.req.rawHeaders.find((header) =>
+    header.startsWith("http")
+  );
   try {
     const playlist = await Playlist.findById(req.params.id);
     const trackPromises = playlist.tracks.map(async (i) => {
       const response = await spotifyApi.getTrack(i);
       return response.body;
     });
+    const followerPlaylist = await PlaylistFollower.find({playlist: playlist.id});
     const trackInfo = await Promise.all(trackPromises);
-    res.render("music/playlists", {
+    res.render("music/playlistsTracks", {
       tracks: trackInfo,
       Info: playlist,
+      NumbFollower: followerPlaylist.length,
+      IsCurrentUser: playlist.user.toString() === req.user.id.toString(),
+      httpHeader: httpHeader,
     });
   } catch (error) {
     next(error);
