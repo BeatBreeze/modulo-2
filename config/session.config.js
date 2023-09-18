@@ -5,6 +5,7 @@ const User = require ("../models/user.model");
 
 module.exports.session = expressSession({
     secret: process.env.SESSION_SECRET || 'super-secret (change it)',
+    // proxy: process.env.SESSION_SECURE === 'true',
     resave: false,
     saveUninitialized: false,
     store: mongoStore.create({
@@ -24,7 +25,6 @@ module.exports.session = expressSession({
         .populate('followers')
         .then((user) => {
           req.user = user;
-          // console.log(user);
           res.locals.currentUser = user;
           next();
         })

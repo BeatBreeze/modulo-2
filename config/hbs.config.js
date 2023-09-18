@@ -5,22 +5,13 @@ hbs.registerPartials(`${__dirname}/../views/partials`);
 hbs.registerHelper("prettyDate", (date) => {
   return date.toLocaleDateString("es-ES", {});
 });
-hbs.registerHelper('arrayEquals', (array1, array2, options) => {
-
-  // Función para comparar dos arrays
-  function arraysAreEqual(arr1, arr2) {
-    
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i].id !== arr2[i].id) {
-        return false;
-      }
-    }
+hbs.registerHelper("yearDate", (date) => {
+  return date.split("-")[0];
+});
+hbs.registerHelper('eq', (a, b) => {
+  if (a !== b) {
     return true;
-  }
-
-  if (arraysAreEqual(array1, array2)) {
-    return options.fn(this);
   } else {
-    return options.inverse(this);
+    return false;
   }
 });

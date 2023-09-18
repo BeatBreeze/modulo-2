@@ -1,32 +1,81 @@
-{{#each users as |oneUser|}}
-  <div class="card">
-    <h5 class="card-header">{{oneUser.user.username}}</h5>
-    <div class="card-body">
-      <h5 class="card-title"></h5>
-      <p class="card-text"></p>
-      <div class='row row-cols-1 row-cols-md-4 g-2'>
-        {{#each oneUser.playlists as |playlist|}}
-        <div class='col'>
-          <div class='card border border-0'>
-            {{> playlist info= playlist}}
+<div class="container row row-cols-2 row-cols-lg-2 g-2 g-lg-3">
+  {{#each users as |oneUser|}}
+    <div class="card mb-3 p-0">
+      {{!-- FOLLOW USER --}}
+      <div class="d-flex justify-content-end">
+        {{#if oneUser.isFollowingUser}}
+          <form
+            method="POST"
+            action="/addFollowers/{{oneUser.user.id}}/delete"
+          >
+            <button type="submit" class="btn btn-lg border border-0 btn-purple-follow">
+              <i class="fa fa-user-times"></i>
+            </button>
+          </form>
+        {{else}}
+          <form method="POST" action="/addFollowers/{{oneUser.user.id}}">
+            <button type="submit" class="btn btn-lg border border-0 btn-purple-follow">
+              <i class="fa fa-user-plus"></i>
+            </button>
+          </form>
+        {{/if}}
+      </div>
+      {{!-- USER INFO --}}
+      <div class="row g-0 mb-3">
+        <div class="col-md-6 d-flex align-items-start justify-content-evenly">
+          <div class="d-flex flex-column align-items-center">
+            <form
+                  method="get"
+                  action="/user/{{oneUser.user.id}}"
+                  class=""
+                >
+              <button type="submit" class="border border-0 bg-transparent text-light">
+                <h5 class="mb-4">@{{oneUser.user.username}}</h5>
+              </button>
+            </form>
+            <form
+                  method="get"
+                  action="/user/{{oneUser.user.id}}"
+                  class=""
+            >
+              <button type="submit" class="border border-0 bg-transparent">
+                <img src="{{oneUser.user.avatarURL}}" alt="User Profile Image" class="img-fluid rounded-circle">
+              </button>            
+            </form>
+
+          </div>
+          <div class="d-flex flex-column align-items-start">
+            <p class="fw-normal fs-6">Followers: {{oneUser.followers}}</p>
+          </div>        
+        </div>
+        {{!-- PLAYLIST USER --}}
+        <div class="col-md-6">
+          <div class="card-body">
+            <div class='row row-cols-1 row-cols-md-1 g-2'>
+              <p class="fw-normal fs-6 mb-0 pb-0 text-end">Total Playlists: {{oneUser.numPlaylist}}</p>
+              {{#each oneUser.playlists as |playlist|}}
+              <div class='col'>
+                <div type="button" class='card border border-0 bg-transparent text-light' onclick='window.location.href="playlist/{{playlist.playlist.id}}"'>
+                  {{> playlist info=playlist isProfile=false}}
+                </div>
+              </div>
+              {{/each}}
+              {{#if (eq oneUser.numPlaylist oneUser.playlists.length)}}
+                <form
+                  method="get"
+                  action="/user/{{oneUser.user.id}}"
+                  class="d-flex justify-content-end"
+                >
+                  <button type="submit" class="btn btn-sm border border-0 btn-purple-follow">
+                    See more...
+                  </button>
+                </form>
+              {{/if}}
+            </div>
           </div>
         </div>
-        {{/each}}
       </div>
-      {{#if followersUser}} 
-      <form method ="POST" action = "/addFollowers/{{oneUser.user.id}}" >
-      <button type= "submit" class="btn btn-primary">Follow</button></form>
-       {{else}}<form method ="POST" action = "/addFollowers/{{oneUser.user.id}}" >
-      <button type= "submit" class="btn btn-primary">Follow</button></form>
-      {{/if}}
-      <a href="#" class="btn btn-primary">Like</a>
-      {{../actualUser}}
     </div>
-  </div>
-  {{!-- {{#if (arrayEquals oneUser.playlists followersUser)}}
-  Verdadero
-{{else}}
-  Falso
-{{/if}} --}}
-{{/each}}
+  {{/each}}
+</div>
 

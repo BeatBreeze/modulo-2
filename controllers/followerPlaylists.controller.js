@@ -1,7 +1,7 @@
 const PlaylistFollower = require("../models/follower.playlist.model");
 
 module.exports.doFollowingPlaylist = (req, res, next) => {
-    PlaylistFollower.create({
+  PlaylistFollower.create({
     user: req.user.id,
     playlist: req.params.id,
   })
@@ -13,7 +13,10 @@ module.exports.doFollowingPlaylist = (req, res, next) => {
 
 // DELETE
 module.exports.delete = (req, res, next) => {
-    PlaylistFollower.findByIdAndDelete(req.param.id)
+  PlaylistFollower.findOneAndDelete({
+    user: req.user.id,
+    playlist: req.params.id,
+  })
     .then(() => {
       res.redirect(`back`);
     })

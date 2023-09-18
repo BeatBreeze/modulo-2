@@ -4,44 +4,47 @@
         <div class="card">
           <div class="card-body">
             <div class="row">
-              <div class="col-md-3 d-flex justify-content-center align-items-start">
-                <img src="{{user.avatarURL}}" alt="User Profile Image" class="img-fluid rounded-circle">
+              <div class="col-md-3 d-flex flex-column justify-content-start align-items-center">
+                <img src="{{user.avatarURL}}" alt="User Profile Image" class="card-img-top object-fit-cover img-fluid rounded-circle imgAvatar mb-3">
+                {{!--AVATAR--}} 
+                <form method="POST" action="/profile/avatar" enctype="multipart/form-data">
+                    <div class="input-group mb-1">
+                      <span class="input-group-text"><i class = "fa fa-download"></i></span> 
+                      <input name="avatarURL" type="file" class="form-control" />        
+                    </div>
+                    <div class = "d-grid" "gap-2 mt-3">
+                      <button  type = "submit" class = "btn btn-outline-light btn-sm border border-0" ><i class="fa fa-floppy-o"></i></button>
+                    </div>
+                </form>
               </div>
               <div class="col-md-9">
                 <div class="d-flex justify-content-between">
                   <h5 class="card-title">@{{user.username}}</h5>
-                  <a class="btn btn-outline-dark btn-lg me-2" href="/profile/edit">Edit</a>
+                  <a class="btn btn-outline-light btn-lg border border-0" href="/profile/edit"><i class="fa fa-pencil"></i></a>
                 </div>                
                 <p class="card-text">Name: {{user.name}}</p>
                 <p class="card-text">Email: {{user.email}}</p>
                 <p class="card-text">Register: {{prettyDate user.createdAt}}</p>
                 <ul class="list-unstyled">
-                  <li>Playlists: {{user.playlists.length}}</li>
+                  <li><i class="fa fa-user"></i> {{user.followers.length}}</li>
+                  <li>Total Playlists: {{user.playlists.length}}</li>
                 </ul>
-                <div class="d-flex justify-content-around mb-4">
+                <hr>
+                <div class="d-flex mb-4 justify-content-between align-items-center">
                   <h2 class="fw-bolder">Playlists</h2>
-                  <a class="btn btn-light" href="/playlist"><strong
-                    style="color: purple"
-                    >New Playlist</strong>
+                  <a class="btn btn-outline-light btn-lg border border-0 fs-6" href="/playlist">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Add
                   </a>
-                </div>
-                
+                </div>                
                 <div class='row row-cols-1 row-cols-md-4 g-2'>
-                      {{#each user.playlists as |playlist|}}
-                      <div class='col'>
-                        <div class='card border border-0'>
-                          {{> playlist info=playlist}}
-                        </div>
+                  {{#each user.playlists as |playlist|}}
+                  <div class='col'>
+                      <div type="button" class='card border border-0 bg-transparent text-light' onclick='window.location.href="/playlist/{{playlist.id}}"'>
+                      {{> playlist info=playlist isProfile=true}}
                       </div>
-                      {{/each}}
-                </div>
-                <form
-                  method="POST"
-                  class="text-center"
-                  action="/profile/delete"
-                  >
-                  <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                  </div>
+                  {{/each}}
+                </div>                
               </div>
             </div>
           </div>

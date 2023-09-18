@@ -1,0 +1,14 @@
+<div class="m-5">
+  <div class="container text-center text-light">
+    <div class="px-2 border border-0">
+      <h3 class="mb-3">Total Playlists: {{numPlaylists}}</h3>
+      <div class='row row-cols-2 row-cols-lg-6 g-2 g-lg-3'>
+        {{#each playlists as |playlist|}}
+          <div type="button" class='card border border-0 bg-transparent text-light' onclick='window.location.href="playlist/{{playliplaylist.id}}"'>
+            {{> playlistList info=playlist isProfile=false}}
+          </div>   
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>

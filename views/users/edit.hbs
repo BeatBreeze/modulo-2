@@ -1,41 +1,44 @@
 <div class="container mb-5">
   <div class="mb-3 mt-3">
-    <a class="btn btn-primary" href="/profile">Back</a>
+    <a href="/profile" class="btn btn-outline-light btn-lg border border-0">
+      <span class="fa fa-angle-left"></span>
+      Back
+    </a>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <h1 class="text-center">Edit</h1>
+      <div class="d-flex align-items-center justify-content-between">
+        <h1 class="text-center">Edit Account</h1>
+        <form
+          method="POST"
+          class="text-center"
+          action="/profile/delete"
+          >
+          <button type="submit" class="btn btn-outline-danger btn-sm fa-sm border border-0"><i class="fa fa-trash-o"></i> Delete Account</button>
+        </form>
+      </div>   
       <form method="POST" action="/profile">
-        {{!-- <div class="mb-3">
-          <label class="form-label">Name</label>
-          <input
-            name="name"
-            type="text"
-            class="form-control"
-            placeholder="Name User"
-            value="{{user.name}}"
-          />
-        </div> --}}
         {{!--USERNAME--}}  
-          <div class="input-group mb-1">
-             <span class="input-group-text"><i class = "fa fa-fw fa-user-secret"></i></span> 
-             <input type="text" name="username" class="form-control{{#if errors.username}} is-invalid{{/if}}" placeholder="Username" aria-label="Name" value = "{{user.username}}"/> 
-             {{#if errors.username}}<div class = "invalid-feedback">{{ errors.username }}</div>{{/if}} 
-          </div>
-
-          {{!--EMAIl--}}  
-          <div class="input-group mb-1">
-             <span class="input-group-text"><i class = "fa fa-fw fa-envelope-o"></i></span> 
-             <input type="text" name="email" class="form-control{{#if errors.email}} is-invalid{{/if}}" placeholder="email" aria-label="Name" value = "{{user.email}}"/> 
-             {{#if errors.email}}<div class = "invalid-feedback">{{ errors.email }}</div>{{/if}} 
-          </div>
-          {{!--PASSWORD--}}  
         <div class="input-group mb-1">
-            <span class="input-group-text"><i class="fa fa-fw fa-lock"></i></span>
-            <input type="password" name="password" class="form-control {{#if errors.password}}is-invalid{{/if}}" placeholder="password" aria-label="Name">
-            {{#if errors.password}}<div class="invalid-feedback">{{ errors.password }}</div>{{/if}}
-          </div>
-        <button type="submit" class="btn btn-success">Edit</button>
+          <span class="input-group-text"><i class = "fa fa-user-circle-o"></i></span> 
+          <input type="text" name="username" class="form-control{{#if errors.username}} is-invalid{{/if}}" placeholder="Username" aria-label="Name" value = "{{user.username}}"/> 
+          {{#if errors.username}}<div class = "invalid-feedback">{{ errors.username }}</div>{{/if}} 
+        </div>
+        {{!--EMAIl--}}  
+        <div class="input-group mb-1">
+          <span class="input-group-text"><i class = "fa fa-fw fa-envelope-o"></i></span> 
+          <input type="text" name="email" class="form-control{{#if errors.email}} is-invalid{{/if}}" placeholder="email" aria-label="Name" value = "{{user.email}}"/> 
+          {{#if errors.email}}<div class = "invalid-feedback">{{ errors.email }}</div>{{/if}} 
+        </div>
+        {{!--PASSWORD--}}  
+        <div class="input-group mb-1">
+          <span class="input-group-text"><i class="fa fa-fw fa-lock"></i></span>
+          <input type="password" name="password" class="form-control {{#if errors.password}}is-invalid{{/if}}" placeholder="password" aria-label="Name">
+          {{#if errors.password}}<div class="invalid-feedback">{{ errors.password }}</div>{{/if}}
+        </div>
+        <div class = "d-grid" "gap-2 mt-3">
+          <button  type = "submit" class = "btn btn-outline-light btn-lg border border-0 mt-3 btn-purple-follow" ><i class="fa fa-floppy-o"></i> Save Changes</button>
+        </div>
       </form>
     </div>
   </div>

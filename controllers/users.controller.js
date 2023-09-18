@@ -1,8 +1,10 @@
 const User = require("../models/user.model");
 const Playlist = require("../models/playlist.model");
 const mongoose = require("mongoose");
+const FollowersUser = require("../models/follower.user.model");
+const PlaylistFollower = require("../models/follower.playlist.model");
 
-module.exports.home = (req, res) => {
+module.exports.home = (req, res, next) => {
   spotifyApi
     .getRecommendations({
       min_popularity: 90
@@ -18,7 +20,50 @@ module.exports.home = (req, res) => {
       }
     );
 };
-// REGISTRO
+
+module.exports.otherUser = async (req, res, next) => {
+    try {
+      const oneUser = await User.findById(req.params.id);
+      const currentIsFollowerPlaylists = await PlaylistFollower.find({
+        user: req.user.id,
+      });
+      const currentIsFollower = await FollowersUser.find({
+        user: req.user.id,
+      });
+      const userAndPlaylists = [];
+        const playlists = await Playlist.find({ user: oneUser.id });
+        const playlistsData = playlists.map((i, index) => {
+          const isFollowing = currentIsFollowerPlaylists.some(
+            (f) => f.playlist.toString() === i.id.toString()
+          );
+          return { playlist: i, isFollowing };
+        }).filter((f) => f !== null);
+        const isFollowingUser =
+          currentIsFollower &&
+          currentIsFollower.some(
+            (i) => i.otherUser.toString() === oneUser.id.toString()
+          );
+        const followers = await FollowersUser.find({ otherUser: oneUser.id });
+        userAndPlaylists.push({
+          numPlaylist: playlists && playlists.length,
+          playlists: playlistsData,
+          user: oneUser,
+          followers: followers && followers.length,
+          isFollowingUser: isFollowingUser,
+        });
+      if (userAndPlaylists.length > 0) {
+        console.log(userAndPlaylists);
+        res.render("users/otherUser", {
+          user: userAndPlaylists[0] })
+      } else {
+        res.redirect("/");
+      }
+    } catch (error) {
+      console.error(error);
+      res.redirect("/");
+    }
+};
+// REGISTER
 module.exports.register = (req, res, next) => res.render("users/register");
 
 module.exports.doRegister = (req, res, next) => {
@@ -125,6 +170,26 @@ module.exports.doEdit = (req, res, next) => {
         });
       }
     })
+    .catch((error) => {
+      console.error(error);
+      if (error instanceof mongoose.Error.ValidationError) {
+        res.render("users/edit", { user: req.body, errors: error.errors });
+      } else {
+        next(error);
+      }
+    });
+};
+
+module.exports.doEditAvatar = (req, res, next) => {
+  User.findOne({ username: req.body.username })
+    .then((user) => {
+        req.user.avatarURL= req.file
+            ? req.file.path
+            : `https://res.cloudinary.com/dznwlaen6/image/upload/v1695029184/beatBreeze/user-no-cover_r7y0t6.jpg`; // multer middleware is filling this field
+        return req.user.save().then(() => {
+          res.redirect("/profile");
+        });
+      })
     .catch((error) => {
       console.error(error);
       if (error instanceof mongoose.Error.ValidationError) {

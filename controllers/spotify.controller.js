@@ -64,9 +64,16 @@ module.exports.albums = (req, res) => {
 
 module.exports.tracks = (req, res) => {
   spotifyApi
-    .getAlbumTracks(req.params.id)
-    .then((tracks) => {
-      res.render("music/tracks", { tracks: tracks.body.items });
+    .getAlbum(req.params.id)
+    .then((album) => {
+      const httpHeader = res.req.rawHeaders.find((header) =>
+        header.startsWith("http")
+      );
+      res.render("music/tracks", {
+        tracks: album.body.tracks.items,
+        AlbumInfo: album.body,
+        httpHeader: httpHeader,
+      });
     })
     .catch((err) =>
       console.log("The error while searching albums occurred: ", err)
@@ -86,7 +93,6 @@ module.exports.genres = (req, res) => {
 };
 /*Búsqueda por un Género*/
 module.exports.oneGenres = (req, res) => {
-  console.log("Genre", req.params.id);
   spotifyApi
     .getRecommendations({
       min_energy: 0.4,
@@ -118,7 +124,7 @@ module.exports.oneArtist = (req, res) => {
       spotifyApi.getArtistAlbums(req.params.id).then((albums) => {
         res.render("music/artists", {
           Info: { Artists: Artists, Albums: albums.body.items },
-          httpHeader: httpHeader
+          httpHeader: httpHeader,
         });
       });
     })
@@ -176,6 +182,3 @@ module.exports.home = (req, res) => {
   });
 });
 }
-
-
-

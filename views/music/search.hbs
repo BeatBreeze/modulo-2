@@ -4,53 +4,128 @@
     <div class="px-2 border border-0">
       <h3>ARTISTS</h3>
       <div class='row row-cols-2 row-cols-lg-6 g-2 g-lg-3'>
-      {{#each artists.Artists as |artist|}}
-        <div class='col card border border-0 bg-transparent text-light'>
-          {{> artistAlbum info=artist  isAlbum=true}}
-        </div>
-      {{/each}}
+        {{#each artists.Artists as |artist|}}
+          <button class='col card border border-0 bg-transparent text-light d-flex align-items-center pt-2 pb-0' onclick='window.location.href="artist/{{artist.id}}"'>
+            {{> artistAlbum info=artist  isAlbum=true}}
+          </button>          
+        {{/each}}
       </div>
+      {{!-- -CARRUSEL --}}
+      {{!-- <div id="carouselArtists" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active d-flex justify-content-around">
+            <a class="figure carouselStyle" href="/profile">
+              <img
+                src="https://m.media-amazon.com/images/I/81NUchJX2GL.png"
+                class="figure-img img-fluid rounded"
+                alt="..."
+                href="/profile"
+              />
+            </a>
+            <a class="figure carouselStyle" href="/profile">
+              <img
+                src="https://i.ytimg.com/vi/als7xoyNyoE/maxresdefault.jpg"
+                class="figure-img img-fluid rounded"
+                alt="..."
+                href="/profile"
+              />
+            </a>
+            <a class="figure carouselStyle" href="/profile">
+              <img
+                src="https://res.cloudinary.com/dznwlaen6/image/upload/v1694259428/beatBreeze/v1h1mgecezv7nemh5pdi.jpg"
+                class="figure-img img-fluid rounded"
+                alt="..."
+                href="/profile"
+              />
+            </a>
+            <a class="figure carouselStyle" href="/profile">
+              <img
+                src="https://i.ytimg.com/vi/9sZ5ELJ4i1s/maxresdefault.jpg"
+                class="figure-img img-fluid rounded"
+                alt="..."
+                href="/profile"
+              />
+            </a>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="https://res.cloudinary.com/dznwlaen6/image/upload/v1694259428/beatBreeze/v1h1mgecezv7nemh5pdi.jpg"
+              class="d-block w-100"
+              alt="2"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="https://i.ytimg.com/vi/9sZ5ELJ4i1s/maxresdefault.jpg"
+              class="d-block w-100"
+              alt="3"
+            />
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev carouselButton"
+          type="button"
+          data-bs-target="#carouselArtists"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next carouselButton"
+          type="button"
+          data-bs-target="#carouselArtists"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div> --}}
     </div>
     {{!-- - ALBUMS --}}
     <div class="px-2 border border-0">
       <h3>ALBUMS</h3>
       <div class='row row-cols-2 row-cols-lg-6 g-2 g-lg-3'>
-        {{#each artists.Albums as |artist|}}
-          <div class='col card border border-0 bg-transparent text-light'>
-            {{> artistAlbum info=artist  isAlbum=false}}
-          </div>
+        {{#each artists.Albums as |album|}}
+          <button class='col card border border-0 bg-transparent text-light d-flex align-items-center pt-2 pb-0' onclick='window.location.href="albums/{{album.id}}"'>
+            {{> artistAlbum info=album  isAlbum=false}}
+          </button>
         {{/each}}
       </div>
     </div>
     {{!-- - TRACKS --}}
     <div class="px-2 border border-0 text-light">
       <h3>TRACKS</h3>
-      <div class='row row-cols-2 row-cols-lg-6 g-2 g-lg-3'>
+      <div class="row" >
         {{#each artists.Tracks as |track|}}
-          <div class='col card border border-0 bg-transparent text-light'>
-            {{> track info=track isTrack=true}}
-            <div class="text-middle">
-              <div class="d-inline-flex gap-1">
-                <a
-                  class="addPlaylist text-decoration-none"
-                  data-bs-toggle="collapse"
-                  href="#collapse{{track.id}}"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="collapse{{track.id}}"
-                >
-                  + Add
-                </a>
-              </div>
-              <div class="collapse" id="collapse{{track.id}}">
-                <div class="card card-body z-3 position-absolute">
-                  {{#each ../currentUser.playlists as |playlist|}}
-                    <form action="/playlist/addTrack/{{playlist.id}}/{{track.id}}" method="post">
-                      <button type="submit" class="btn btn-danger btn-sm">
-                        {{playlist.name}}
-                      </button>
-                    </form>
-                  {{/each}}
+          <div class='col-4 card border border-0 bg-transparent text-light px-2 pb-2 pt-2'>
+            <div class="d-flex flex-column justify-content-center align-items-center">
+              {{> trackPlayer info=track}}
+              {{> track info=track isTrack=true}}
+              {{!-- - Add Playlist --}}
+              <div class="text-middle">
+                <div class="d-inline-flex gap-1">
+                  <a
+                    class="addPlaylist"
+                    data-bs-toggle="collapse"
+                    href="#collapse{{track.id}}"
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapse{{track.id}}"
+                  >
+                    <i class = "fa fa-list-ul fa-lg p-2"></i>
+                  </a>
+                </div>
+                <div class="collapse" id="collapse{{track.id}}">
+                  <div class="card card-body border border-0">
+                    {{#each ../currentUser.playlists as |playlist|}}
+                      <form action="/playlist/addTrack/{{playlist.id}}/{{track.id}}" method="post">
+                        <button type="submit" class="btn btn-outline-light border border-0 px-5">
+                          +{{playlist.name}}
+                        </button>
+                      </form>
+                    {{/each}}
+                  </div>
                 </div>
               </div>
             </div>
@@ -60,3 +135,6 @@
     </div>
   </div>
 </div>
+
+            hr despues de la informacion del usuario
+            icono playlista 

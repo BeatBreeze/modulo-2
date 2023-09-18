@@ -1,0 +1,80 @@
+<div class="mb-5 mx-5">
+  <div>
+    <a href="{{httpHeader}}" class="btn btn-outline-light btn-lg border border-0">
+      <span class="fa fa-angle-left"></span>
+      Back
+    </a>
+  </div>
+  {{!-- IMAGE --}}
+  <div class="d-flex justify-content-center">
+    {{#if Info.imgPlaylist}}
+      {{#if Info.imgPlaylist}}
+        <div class="position-relative">
+          {{#if IsCurrentUser}}
+            <form
+              method="POST"
+              class="text-center"
+              action="/playlist/{{Info.id}}/delete"
+              >
+              <button type="submit" class="btn btn-outline-danger btn-lg fa-lg border border-0 position-absolute translate-middle iconDelete"><i class = "fa fa-trash-o"></i></button>
+            </form>
+          {{/if}}
+          <img
+            src="{{Info.imgPlaylist}}"
+            class="card-img-top object-fit-contain imgArtist shadow-lg"
+            alt="{{Info.name}}"
+          />          
+        </div>
+      {{else}}
+        <div class="position-relative">
+          {{#if IsCurrentUser}}
+            <form
+              method="POST"
+              class="text-center"
+              action="/playlist/{{Info.id}}/delete"
+              >
+              <button type="submit" class="btn btn-outline-danger btn-lg fa-lg border border-0 position-absolute translate-middle iconDelete"><i class = "fa fa-trash-o"></i></button>
+            </form>
+          {{/if}}
+          <img
+            src="../img/no-cover.png"
+            class="card-img-top object-fit-contain imgArtist shadow-lg"
+            alt="{{Info.name}}"
+          />
+        </div>
+      {{/if}}
+    {{else}}
+      <div class="position-relative">
+        {{#if IsCurrentUser}}
+          <form
+            method="POST"
+            class="text-center"
+            action="/playlist/{{Info.id}}/delete"
+            >
+            <button type="submit" class="btn btn-outline-danger btn-lg fa-lg border border-0 position-absolute translate-middle iconDelete"><i class = "fa fa-trash-o"></i></button>
+          </form>
+        {{/if}}
+        <img
+          src="../img/no-cover.png"
+          class="card-img-top object-fit-contain imgArtist shadow-lg"
+          alt="{{Info.name}}"
+        />
+      </div>
+    {{/if}}
+  </div>
+  {{!-- TEXT --}}
+  <div class="text-center text-light">    
+    <h1>{{Info.name}}</h1>
+    <p class="m-0">{{NumbFollower}} <i class="fa fa-heart"></i> · {{prettyDate Info.createdAt}}</p>
+    <ul class="d-flex justify-content-center p-0 m-0">
+      {{#each Info.artists as |artist|}}
+        <a class="btn btn-outline-light btn-lg border border-0 p-2 text-capitalize text-decoration-underline" href="../artist/{{artist.id}}">{{artist.name}}</a>
+      {{/each}}
+    </ul>
+    <p class="d-flex justify-content-end">Total Tracks: {{Info.tracks.length}}</p>
+  </div>
+  {{!-- TRACKS --}}
+  {{#each tracks as |track|}}
+    {{> trackPlayer info=track}}
+  {{/each}}
+</div> 

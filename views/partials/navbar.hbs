@@ -2,7 +2,7 @@
   <div class="container d-flex justify-space-between">
     {{! - LEFT }}
     {{! - NAVEGATION MENU }}
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
       <button
         class="btn btn-light border border-0"
         style="color: white; background-color: transparent; "
@@ -20,7 +20,7 @@
         id="offcanvasScrolling"
         aria-labelledby="offcanvasScrollingLabel"
       >
-        <div class="offcanvas-header "data-bs-theme="dark">
+        <div class="offcanvas-header" data-bs-theme="dark">
           <button
             type="button"
             class="btn-close"
@@ -37,15 +37,15 @@
               <a class="nav-link" href="/genres">GENRES</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">PLAYLISTS</a>
+              <a class="nav-link" href="allPlaylist">PLAYLISTS</a>
             </li>
           </ul>
         </div>
       </div>
       {{! LOGO }}
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand d-flex align-items-center" href="/">
         <img
-          src="https://media.istockphoto.com/id/1286099898/es/vector/color-geom%C3%A9trico-ecualizador-circular-de-ne%C3%B3n-ondas-de-sonido-de-audio-redondo-eq.jpg?s=2048x2048&w=is&k=20&c=Q2R16IuQu8GJ1-DWv4_fpA9WhLihOH3jS7Dtwyj404I="
+          src="/img/logo.png"
           alt="Logo"
           width="30"
           height="24"
@@ -55,7 +55,7 @@
       </a>
     </div>
     {{! - SEARCH }}
-    <form class="d-flex" method="GET" action="/search">
+    <form class="d-flex align-items-center m-0" method="GET" action="/search">
       <input
         class="form-control me-2"
         type="text"
@@ -73,7 +73,7 @@
           <a href="/profile">
             <img
               src="{{currentUser.avatarURL}}"
-              class="rounded-circle imgTop"
+              class="rounded-circle imgTop card-img-top object-fit-cover"
               id="rounded-circle-navbar"
               href="/profile"
               alt="User profile"

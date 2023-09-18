@@ -1,0 +1,49 @@
+  <div>
+      {{#if info.playlist.imgPlaylist}}
+        <a href="/playlist/{{info.playlist.id}}">
+          <img
+            src="{{info.playlist.imgPlaylist}}"
+            class="card-img-top object-fit-cover imgListPlaylist"
+            href="/playlist/{{info.playlist.id}}"
+            alt="{{info.playlist.name}}"
+          />
+        </a>
+      {{else}}
+        <a href="/playlist/{{info.playlist.id}}">
+          <img
+            src="img/no-cover.png"
+            class="card-img-top object-fit-cover imgListPlaylist"
+            href="/playlist/{{info.playlist.id}}"
+            alt="{{info.playlist.name}}"
+          />
+        </a>
+      {{/if}}
+      {{! TEXT }}
+      <div
+        class="card-body text-middle d-flex justify-content-between mb-0 pb-0"
+      >
+        <p class="card-title"><strong>{{info.playlist.name}}</strong></p>
+        {{#if info.isFollowing}}
+          <form
+            method="POST"
+            action="/addPlaylistFollower/{{info.playlist.id}}/delete"
+          >
+            <button
+              type="submit"
+              class="btn btn-sm border border-0 btn-purple-follow"
+            ><i class="fa fa-heart"></i></button>
+          </form>
+        {{else}}
+          <form
+            method="POST"
+            action="/addPlaylistFollower/{{info.playlist.id}}"
+          >
+            <button
+              type="submit"
+              class="btn btn-sm border border-0 btn-purple-follow"
+            ><i class="fa fa-heart-o"></i></button>
+          </form>
+        {{/if}}
+      </div>
+      <p class="d-flex justify-content-center mt-0" >{{info.playlist.tracks.length}} tracks</p>
+  </div>

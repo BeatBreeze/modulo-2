@@ -1,0 +1,40 @@
+<div class="container mb-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-3 d-flex justify-content-center align-items-start">
+                <img src="{{user.user.avatarURL}}" alt="User Profile Image" class="card-img-top object-fit-cover img-fluid rounded-circle imgAvatar">
+              </div>
+              <div class="col-md-9">
+                <div class="d-flex justify-content-between">
+                  <h5 class="card-title">@{{user.user.username}}</h5>
+                </div>                
+                <p class="card-text">Name: {{user.user.name}}</p>
+                <p class="card-text">Email: {{user.user.email}}</p>
+                <p class="card-text">Register: {{prettyDate user.user.createdAt}}</p>
+                <ul class="list-unstyled">
+                  <li><i class="fa fa-user"></i> {{user.followers}}</li>
+                  <li>Total Playlists: {{user.playlists.length}}</li>
+                </ul>
+                <hr>
+                <div class="d-flex mb-4 justify-content-between align-items-center">
+                  <h2 class="fw-bolder">Playlists</h2>
+                </div>                
+                <div class='row row-cols-1 row-cols-md-4 g-2'>
+                  {{#each user.playlists as |playlist|}}
+                  <div class='col'>
+                      <div type="button" class='card border border-0 bg-transparent text-light' onclick='window.location.href="/playlist/{{playlist.playlist.id}}"'>
+                      {{> playlist info=playlist isProfile=true isUserProfile=true}}
+                      </div>
+                  </div>
+                  {{/each}}
+                </div>                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
