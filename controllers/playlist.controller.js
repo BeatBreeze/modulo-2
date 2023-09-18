@@ -151,7 +151,7 @@ module.exports.listAll = async (req, res, next) => {
     if (playlistsData.length > 0) {
       res.render("music/allPlaylists", {
         playlists: playlistsData,
-        numPlaylists: playlists && playlists.length,
+        numPlaylists: playlistsData && playlistsData.length,
       });
     } else {
       res.redirect("/");

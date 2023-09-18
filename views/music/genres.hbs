@@ -1,15 +1,12 @@
-<div class="container ">
-  <div class="row">
+<div class="px-2 border border-0">
+  <h3>GENRES</h3>
+  <div class='row row-cols-2 row-cols-lg-6 g-2 g-lg-3'>
     {{#each genreSeeds as |genreSeed|}}
-    <div class="col-md-4 custom-card">
-      <div class="card custom-card-inner">
+      <button type="button" class='col card border border-0 bg-transparent text-light d-flex align-items-center pt-2 pb-2' onclick='window.location.href="genres/{{genreSeed}}"'>
         <img src="https://lamenteesmaravillosa.com/wp-content/uploads/2019/03/discos-vinilos.jpg" class="card-img-top" alt="Imagen del género">
-        <div class="card-body">
-          <h5 class="card-title">{{this}}</h5>
-          <a href="//{{this}}" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></a>
-        </div>
-      </div>
-    </div>
+        <h5 class="card-title">{{this}}</h5>
+        <a href="genres/{{genreSeed}}" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></a>
+      </button>
     {{/each}}
   </div>
 </div>

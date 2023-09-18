@@ -123,12 +123,13 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(225, 107, 107, 0.848); 
   transition: box-shadow 0.3s ease-in-out;
-  margin-top: 20px;
+  margin-top: 0px;
   padding: 20px; /* tamaño del carousel*/
-  width: 60%; /* ancho del carousel */
+  width: 100%; /* ancho del carousel */
 }
 .Carousel-general:hover{
   box-shadow: 0px 4px 8px white;
+  margin-top: 0px;
 }
 /*posición de los botones*/
 .carousel-control-prev,
@@ -138,13 +139,13 @@ body {
   transform: translateY(-50%);
 }
 .carousel-inner {
-  max-width:700px; max-height:700px;
+  max-height:350px;
 }
-.carousel-item {
-  max-width:700px; max-height:700px
-}
+/* .carousel-item {
+  max-height:100px;
+  object-fit: fill;
+} */
 .Conjunto {
-  display: flex;
   gap: 50px;
 }
 /*Top 3*/
@@ -153,7 +154,7 @@ body {
 }
 .iframes-general{
   /*Posición iframes*/
-  width: 40%; /* tamaño del cuadrado*/
+  width: 50%; /* tamaño del cuadrado*/
   margin-top: 20px;
   padding: 50px;
   display: flex;
@@ -178,7 +179,6 @@ body {
 .searchUser-general{
   width:100%;
   height: 90;
-  margin-top:50px;
 }
 
 /*Botón cambia de color el background y las letras*/
@@ -206,7 +206,7 @@ body {
   border-radius:8px;
   box-shadow: 0 8px 16px rgba(225, 107, 107, 0.848); /* Agregar una sombra */
   transition: box-shadow 0.3s ease-in-out;
-  position:absolute;
+  /* position:absolute; */
   top: 115px;
   right: 90px;
   width: 20rem;

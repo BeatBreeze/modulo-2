@@ -1,0 +1,14 @@
+<div class="m-5">
+  <div class="container text-center text-light">
+    {{!-- - ALBUMS --}}
+    <div class="px-2 border border-0">
+      <img src="https://lamenteesmaravillosa.com/wp-content/uploads/2019/03/discos-vinilos.jpg" class="card-img-top object-fit-cover imgList" alt="Imagen del género">
+      <h3>{{nameGenre}}</h3>
+      <div>
+        {{#each tracks as |track|}}
+          {{> trackPlayer info=track}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
