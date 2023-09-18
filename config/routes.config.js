@@ -43,10 +43,6 @@ router.get("/genres", spotify.genres); // Todos los generos
 router.get("/genres/:id", spotify.oneGenres); // Genero especifico
 // router.get("/artists", spotify.artists); // Todos los artista
 router.get("/artist/:id", spotify.oneArtist); // Genero especifico
-
-// Seguir otros usuarios si da la vida
-// router.get("/users", users.list);
-
 module.exports = router;
 
 

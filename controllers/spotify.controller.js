@@ -72,19 +72,19 @@ module.exports.tracks = (req, res) => {
       console.log("The error while searching albums occurred: ", err)
     );
 };
-
+/*Géneros musicales*/
 module.exports.genres = (req, res) => {
   spotifyApi.getAvailableGenreSeeds().then(
     function (data) {
-      let genreSeeds = data.body;
-      console.log(genreSeeds);
+      let genreSeeds = data.body.genres;
+      res.render("music/genres",{genreSeeds:genreSeeds});
     },
     function (err) {
       console.log("Something went wrong!", err);
     }
   );
 };
-
+/*Búsqueda por un Género*/
 module.exports.oneGenres = (req, res) => {
   console.log("Genre", req.params.id);
   spotifyApi
@@ -126,21 +126,56 @@ module.exports.oneArtist = (req, res) => {
       console.log("The error while searching artist occurred: ", err)
     );
 };
+/*Géneros más populares*/
 module.exports.home = (req, res) => {
-  spotifyApi
-    .getRecommendations({
-      seed_genres: "chill,techno,house,metal,hardstyle",
-      min_popularity: 85,
-      limit: 10
-    })
-    .then(
-      function (data) {
-        let recommendations = data.body;
-        console.log(recommendations);
-        res.render("home",{recommendations : recommendations})
-      },
-      function (err) {
-        console.log("Something went wrong!", err);
-      }
-    );
-};
+ let charts;
+ let strongest;
+ let instrumentals;
+ let workouts;
+//Charts//
+ spotifyApi
+ .getRecommendations({
+  seed_genres: "chill,techno,house,metal,hardstyle",
+  min_popularity: 75,
+  limit: 10
+ })
+ .then((data) => {
+  charts = data.body.tracks
+ })
+ //strongest//
+ .then(() => {
+  spotifyApi.getRecommendations({
+    seed_genres:"hardstyle",
+      min_tempo: 150,
+      popularity: 55,
+      limit: 9
+  })
+  .then((data) => {
+  strongest= data.body.tracks;
+  });
+  //RoofTop vibes//
+  spotifyApi.getRecommendations({
+    seed_genres:"chill",
+    min_tempo:100,
+    popularity:65,
+    limit:9
+  })
+  .then ((data) => {
+    instrumentals = data.body.tracks;
+  });
+  //Workouts//
+  spotifyApi.getRecommendations({
+    seed_genres:"edm,electro,dance,dancehall,house",
+    min_tempo:128,
+    popularity:65,
+    limit:9
+  })
+  .then ((data) => {
+    workouts = data.body.tracks;
+    res.render("home",{charts:charts,strongest:strongest,instrumentals:instrumentals,workouts:workouts})
+  });
+});
+}
+
+
+
