@@ -47,4 +47,5 @@ router.get("/genres", spotify.genres);
 router.get("/genres/:id", spotify.oneGenres);
 router.get("/artist/:id", spotify.oneArtist);
 
+
 module.exports = router;

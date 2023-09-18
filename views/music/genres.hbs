@@ -1,0 +1,15 @@
+<div class="container ">
+  <div class="row">
+    {{#each genreSeeds as |genreSeed|}}
+    <div class="col-md-4 custom-card">
+      <div class="card custom-card-inner">
+        <img src="https://lamenteesmaravillosa.com/wp-content/uploads/2019/03/discos-vinilos.jpg" class="card-img-top" alt="Imagen del género">
+        <div class="card-body">
+          <h5 class="card-title">{{this}}</h5>
+          <a href="//{{this}}" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>

@@ -59,6 +59,8 @@ body {
   height: 170px;
 }
 
+/*Barra vertical navbar Button*/
+
 .barVertical {
   background-color: transparent;
 }
@@ -67,19 +69,16 @@ body {
   position: absolute;
   background-color: transparent;
 }
-
 .navVertical a {
   border-radius: 8px;
   color: white;
   padding: 1rem;
 }
-
 .navVertical a:hover {
   border-radius: 8px;
   background-color: rgba(128, 0, 128, 0.705);
   color: white;
 }
-
 .addPlaylist:hover {
   background-color: #800080;
   color: white;
@@ -104,6 +103,7 @@ body {
 .card.border-0:hover {
   box-shadow: 0px 4px 8px white;
 }
+
 /* Estilo tarjeta de User Profile */
 .card {
   background-color: transparent;
@@ -113,28 +113,175 @@ body {
   border-radius: 8px;
 }
 
-.btn-purple {
-  background-color: white; /* Fondo blanco*/
-  color: purple; /*Texto morado*/
-  border: none; /*Elimina el borde*/
-  font-weight: bold; /* Texto en negrita*/
-}
+/*HOME VISUALS*/
 
-.btn-purple:hover {
-  background-color: purple;
-  color: white;
-  font-weight: bold;
-}
+/* Estilo para el botón */
 
-.btn-purple-follow {
-  background-color: transparent;
-  color: white;
+/* Section Carousel*/
+.Carousel-general {
   border: none;
-  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(225, 107, 107, 0.848); 
+  transition: box-shadow 0.3s ease-in-out;
+  margin-top: 20px;
+  padding: 20px; /* tamaño del carousel*/
+  width: 60%; /* ancho del carousel */
+}
+.Carousel-general:hover{
+  box-shadow: 0px 4px 8px white;
+}
+/*posición de los botones*/
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.carousel-inner {
+  max-width:700px; max-height:700px;
+}
+.carousel-item {
+  max-width:700px; max-height:700px
+}
+.Conjunto {
+  display: flex;
+  gap: 50px;
+}
+/*Top 3*/
+.chart {
+  margin-top: -10px;
+}
+.iframes-general{
+  /*Posición iframes*/
+  width: 40%; /* tamaño del cuadrado*/
+  margin-top: 20px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente los iframes */
+  /*Colores recuadro iframes*/
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(225, 107, 107, 0.848); /* Agregar una sombra */
+  transition: box-shadow 0.3s ease-in-out;
+}
+.iframes-general:hover{
+  box-shadow: 0px 4px 8px white;
+}
+.iframes-general iframe {
+  border-radius: 12px;
+  width: 90%; /* Usa el ancho completo de su contenedor */
+  height: 80px;
+  margin-top: 10px; /* Espaciado entre los iframes */
+}
+/*Search user*/
+.searchUser-general{
+  width:100%;
+  height: 90;
+  margin-top:50px;
+}
+/*Botón cambia de color el background y las letras*/
+.btn-light-navhome {
+  background-color: white; /* Fondo blanco*/ 
+    color: purple; /*Texto morado*/
+    border: none; /*Elimina el borde*/
+    font-weight: bold; /* Texto en negrita*/
 }
 
-.btn-purple-follow:hover {
-  background-color: white;
-  color: purple;
-  font-weight: bold;
+  .btn:hover {
+    background-color: purple; 
+    color: white; 
+    font-weight: bold;
+}
+form {
+  border: 2px solid white; /* Borde blanco de 2 píxeles*/
+  padding: 10px;/* Espacio de relleno para separar el contenido del borde*/
+  border-radius: 8px;
+  background-color: purple;
+}
+/*aside lateral*/
+.right-aligned-container-home{
+  border: none;
+  border-radius:8px;
+  box-shadow: 0 8px 16px rgba(225, 107, 107, 0.848); /* Agregar una sombra */
+  transition: box-shadow 0.3s ease-in-out;
+  position:absolute;
+  top: 115px;
+  right: 90px;
+  width: 20rem;
+  text-align: center;
+  padding: 20px;
+}
+.right-aligned-container-home:hover {
+  box-shadow: 0px 4px 8px white;
+}
+.content-aside{
+ margin-top: 10px;
+}
+.header-top{
+  margin-top: 20px;
+}
+/*Recommendations*/
+.encabezado{
+  margin-top: 50px;
+  color:white;
+}
+
+.col-md-4 {
+  margin-top: 20px;
+  border: none;
+  border-radius:8px;
+  box-shadow: 0 8px 16px rgba(225, 107, 107, 0.848); /* Agregar una sombra */
+  transition: box-shadow 0.3s ease-in-out;
+}
+.col-md-4:hover{
+  box-shadow: 0px 4px 8px white;
+}
+.containerArtists {
+  margin-bottom:115px;
+}
+/*Footeer*/
+.footer-link {
+  color: white; 
+  text-decoration: none; /* Elimina la subraya por defecto */
+  transition: color 0.3s; /
+}
+.footer-link:hover {
+  color: purple; 
+  text-decoration: underline; /* Agrega subrayado al pasar el mouse*/
+}
+
+/*Genres*/
+.genres-link {
+  color: white; 
+  text-decoration: none; /* Elimina la subraya por defecto */
+  transition: color 0.3s; /
+}
+.genres-link:hover {
+  color: purple; 
+  text-decoration: underline;
+}
+.btn.btn-primary{
+  background-color: white; /* Fondo blanco*/ 
+    color: purple; /*Texto morado*/
+    border: none; /*Elimina el borde*/
+    font-weight: bold; /* Texto en negrita*/
+}
+.btn.btn-primary:hover {
+  background-color: purple;  /*Fondo morado al pasar el mouse*/
+  color: white; /*Texto blanco al pasar el mouse */
+  font-weight: bold; /*Texto en negrita*/
+}
+
+.custom-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-card-inner {
+  text-align: center;
+  font-size: 10px;
+  padding: 10px; 
+  border: purple;
 }
