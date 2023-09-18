@@ -180,6 +180,7 @@ body {
   height: 90;
   margin-top:50px;
 }
+
 /*Botón cambia de color el background y las letras*/
 .btn-light-navhome {
   background-color: white; /* Fondo blanco*/ 
@@ -188,12 +189,12 @@ body {
     font-weight: bold; /* Texto en negrita*/
 }
 
-  .btn:hover {
-    background-color: purple; 
-    color: white; 
-    font-weight: bold;
+.btn-light-navhome:hover {
+  background-color: purple; 
+  color: white; 
+  font-weight: bold;
 }
-form {
+.form-home {
   border: 2px solid white; /* Borde blanco de 2 píxeles*/
   padding: 10px;/* Espacio de relleno para separar el contenido del borde*/
   border-radius: 8px;
@@ -284,4 +285,30 @@ form {
   font-size: 10px;
   padding: 10px; 
   border: purple;
+}
+
+.btn-purple {
+  background-color: white; /* Fondo blanco*/
+  color: purple; /*Texto morado*/
+  border: none; /*Elimina el borde*/
+  font-weight: bold; /* Texto en negrita*/
+}
+
+.btn-purple:hover {
+  background-color: purple;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-purple-follow {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+.btn-purple-follow:hover {
+  background-color: white;
+  color: purple;
+  font-weight: bold;
 }
