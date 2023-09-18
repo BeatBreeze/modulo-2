@@ -1,6 +1,7 @@
 const SpotifyWebApi = require("spotify-web-api-node");
 const Playlist = require("../models/playlist.model");
 const PlaylistFollower = require("../models/follower.playlist.model");
+const FollowersUser = require("../models/follower.user.model");
 const mongoose = require("mongoose");
 const spotifyApi = new SpotifyWebApi({
   clientId: process.env.CLIENT_SPOTIFY_ID,
@@ -131,6 +132,34 @@ module.exports.list = async (req, res, next) => {
   }
 };
 
+module.exports.listAll = async (req, res, next) => {
+  const httpHeader = res.req.rawHeaders.find((header) =>
+    header.startsWith("http")
+  );
+  try {
+    const playlists = await Playlist.find({});
+    const currentIsFollowerPlaylists = await PlaylistFollower.find({
+      user: req.user.id,
+    });
+      const playlistsData = playlists.map((i, index) => {
+        const isFollowing = currentIsFollowerPlaylists.some(
+          (f) => f.playlist.toString() === i.id.toString()
+        );
+        const otherPlaylist = i.user.toString() !== req.user.id.toString() ? i : null
+        return { playlist: otherPlaylist, isFollowing };
+      }).filter((f) => f !== null && f.playlist !== null);
+    if (playlistsData.length > 0) {
+      res.render("music/allPlaylists", {
+        playlists: playlistsData,
+        numPlaylists: playlists && playlists.length,
+      });
+    } else {
+      res.redirect("/");
+    }
+  } catch (error) {
+    next(error);
+  }
+};
 // DELETE
 module.exports.delete = (req, res, next) => {
   Playlist.findByIdAndDelete(req.params.id)

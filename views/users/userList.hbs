@@ -1,6 +1,6 @@
 <div class="container row row-cols-2 row-cols-lg-2 g-2 g-lg-3">
   {{#each users as |oneUser|}}
-    <div class="card mb-3">
+    <div class="card mb-3 p-0">
       {{!-- FOLLOW USER --}}
       <div class="d-flex justify-content-end">
         {{#if oneUser.isFollowingUser}}
@@ -21,16 +21,31 @@
         {{/if}}
       </div>
       {{!-- USER INFO --}}
-      <div class="row g-0">
+      <div class="row g-0 mb-3">
         <div class="col-md-6 d-flex align-items-start justify-content-evenly">
           <div class="d-flex flex-column align-items-center">
-            <h5 class="mb-4">@{{oneUser.user.username}}</h5>
-            <img src="{{oneUser.user.avatarURL}}" alt="User Profile Image" class="img-fluid rounded-circle">         
+            <form
+                  method="get"
+                  action="/user/{{oneUser.user.id}}"
+                  class=""
+                >
+              <button type="submit" class="border border-0 bg-transparent text-light">
+                <h5 class="mb-4">@{{oneUser.user.username}}</h5>
+              </button>
+            </form>
+            <form
+                  method="get"
+                  action="/user/{{oneUser.user.id}}"
+                  class=""
+            >
+              <button type="submit" class="border border-0 bg-transparent">
+                <img src="{{oneUser.user.avatarURL}}" alt="User Profile Image" class="img-fluid rounded-circle">
+              </button>            
+            </form>
+
           </div>
           <div class="d-flex flex-column align-items-start">
-            
             <p class="fw-normal fs-6">Followers: {{oneUser.followers}}</p>
-            
           </div>        
         </div>
         {{!-- PLAYLIST USER --}}

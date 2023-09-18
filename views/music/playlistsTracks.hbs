@@ -65,7 +65,7 @@
   {{!-- TEXT --}}
   <div class="text-center text-light">    
     <h1>{{Info.name}}</h1>
-    <p class="m-0">{{NumbFollower}} <i class="fa fa-user"></i> · {{prettyDate Info.createdAt}}</p>
+    <p class="m-0">{{NumbFollower}} <i class="fa fa-heart"></i> · {{prettyDate Info.createdAt}}</p>
     <ul class="d-flex justify-content-center p-0 m-0">
       {{#each Info.artists as |artist|}}
         <a class="btn btn-outline-light btn-lg border border-0 p-2 text-capitalize text-decoration-underline" href="../artist/{{artist.id}}">{{artist.name}}</a>

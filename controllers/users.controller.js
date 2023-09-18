@@ -180,6 +180,26 @@ module.exports.doEdit = (req, res, next) => {
     });
 };
 
+module.exports.doEditAvatar = (req, res, next) => {
+  User.findOne({ username: req.body.username })
+    .then((user) => {
+        req.user.avatarURL= req.file
+            ? req.file.path
+            : `https://res.cloudinary.com/dznwlaen6/image/upload/v1695029184/beatBreeze/user-no-cover_r7y0t6.jpg`; // multer middleware is filling this field
+        return req.user.save().then(() => {
+          res.redirect("/profile");
+        });
+      })
+    .catch((error) => {
+      console.error(error);
+      if (error instanceof mongoose.Error.ValidationError) {
+        res.render("users/edit", { user: req.body, errors: error.errors });
+      } else {
+        next(error);
+      }
+    });
+};
+
 // DELETE
 module.exports.delete = (req, res, next) => {
   // DELETE PLAYLIST

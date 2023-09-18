@@ -18,6 +18,7 @@ router.get("/", spotify.home);
 router.get("/profile", secure.isAuthenticated, users.profile);
 router.get("/profile/edit", secure.isAuthenticated, users.edit);
 router.post("/profile", secure.isAuthenticated, users.doEdit);
+router.post("/profile/avatar", secure.isAuthenticated, upload.single("avatarURL"), users.doEditAvatar);
 router.post("/profile/delete", secure.isAuthenticated, users.delete);
 router.get("/user/:id", secure.isAuthenticated, users.otherUser);
 
@@ -36,6 +37,7 @@ router.post("/playlist", secure.isAuthenticated, playlist.doEdit);
 router.post("/playlist/addTrack/:idPlaylist/:id", secure.isAuthenticated, playlist.addTrack);
 router.post("/playlist/:id/delete", secure.isAuthenticated, playlist.delete);
 router.get("/playlist/:id", secure.isAuthenticated, playlist.list);
+router.get("/allPlaylist", secure.isAuthenticated, playlist.listAll);
 
 router.get("/search", spotify.search);
 router.get("/albums/:id", spotify.tracks);

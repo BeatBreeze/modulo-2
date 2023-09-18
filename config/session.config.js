@@ -25,7 +25,6 @@ module.exports.session = expressSession({
         .populate('followers')
         .then((user) => {
           req.user = user;
-          // console.log(user);
           res.locals.currentUser = user;
           next();
         })
