@@ -1,14 +1,20 @@
 <div class="m-5">
   <div class="container text-center text-light">
     {{!-- - ALBUMS --}}
-    <div class="px-2 border border-0">
-      <img src="{{genreImage}}" alt="{{nameGenre}}">
-      <h3>{{nameGenre}}</h3>
-      <div>
-        {{#each tracks as |track|}}
-          {{> trackPlayer info=track}}
-        {{/each}}
+    <div class="px-2 border border-0 genre-container">
+      <img src="{{genreImage}}" alt="{{nameGenre}}" class="img-oneGenre">
+     
+      <div class="track-container">
+        <div class="tracks-oneGenre">
+          {{#each tracks as |track|}}
+            <div class="track-item">
+              {{> trackPlayer info=track}}
+            </div>
+          {{/each}}
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+

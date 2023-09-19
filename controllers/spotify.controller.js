@@ -608,9 +608,8 @@ module.exports.oneGenres = (req, res) => {
   const genre = genresData.find(genre => genre.name === genreId);
   if (!genre) {
     // Manejar el caso en el que el género no se encuentre en la lista genresData
-    return res.status(404).send('Género no encontrado');
+    return res.status(404).send('Genre not found');
   }
-
   spotifyApi
     .getRecommendations({
       min_energy: 0.4,
@@ -712,3 +711,5 @@ module.exports.home = (req, res) => {
         });
     });
 };
+
+
