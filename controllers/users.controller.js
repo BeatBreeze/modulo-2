@@ -13,7 +13,6 @@ module.exports.home = (req, res, next) => {
       function (data) {
         let recommendations = data.body;
         res.render ("home",{recommendations} )
-        console.log(recommendations);
       },
       function (err) {
         console.log("Something went wrong!", err);
@@ -52,7 +51,6 @@ module.exports.otherUser = async (req, res, next) => {
           isFollowingUser: isFollowingUser,
         });
       if (userAndPlaylists.length > 0) {
-        console.log(userAndPlaylists);
         res.render("users/otherUser", {
           user: userAndPlaylists[0] })
       } else {

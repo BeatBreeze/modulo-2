@@ -31,11 +31,11 @@
   
   <div class="text-center text-light">
     <h1>{{Info.Artists.name}}</h1>
-    <ul class="d-flex justify-content-evenly align-items-center p-0">
+    <ul class="d-flex justify-content-center align-items-center p-0">
       {{#each Info.Artists.genres as |genre|}}
-      <a class="btn btn-outline-light btn-lg border border-0 p-2 text-capitalize text-decoration-underline" href="/album/{{genre}}">        
-        {{genre}}
-      </a>
+      {{!-- <a class="btn btn-outline-light btn-lg border border-0 p-2 text-capitalize text-decoration-underline" href="/genres/{{genreUrl genre}}">         --}}
+        <p class="text-light p-2 text-capitalize">{{genre}}</p>
+      {{!-- </a> --}}
       {{/each}}
     </ul>
   </div>

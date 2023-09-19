@@ -8,10 +8,14 @@ hbs.registerHelper("prettyDate", (date) => {
 hbs.registerHelper("yearDate", (date) => {
   return date.split("-")[0];
 });
-hbs.registerHelper('eq', (a, b) => {
+hbs.registerHelper("eq", (a, b) => {
   if (a !== b) {
     return true;
   } else {
     return false;
   }
+});
+hbs.registerHelper("genreUrl", (genre) => {
+  const genreNoSpace = genre.replace(/\s+/g, "-");
+  return genreNoSpace;
 });
